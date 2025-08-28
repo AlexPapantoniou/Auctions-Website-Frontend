@@ -1,0 +1,106 @@
+/* Center the whole signup form on the page */
+.signup-form {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* Title */
+.signup-form h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1976d2;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* Two-column grid for inputs */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 2rem; /* row and column spacing */
+  margin-bottom: 1.5rem;
+}
+
+/* Each label+input block aligned vertically */
+.form-grid div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Inputs */
+input {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 5px rgba(25, 118, 210, 0.3);
+}
+
+/* Submit button */
+button {
+  background: #1976d2;
+  color: white;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background: #1565c0;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* Text links (e.g., "Already have an account? Login") */
+p {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+  color: #1976d2;
+  font-size: 0.95rem;
+}
+
+p a {
+  color: #1565c0;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive: stack into 1 column on smaller screens */
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

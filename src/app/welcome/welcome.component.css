@@ -1,0 +1,87 @@
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 87vh;
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+}
+
+.welcome-form {
+  max-width: 400px;
+  width: 100%;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-form h2 {
+  margin-bottom: 0.5rem;
+  color: #1976d2;
+  font-size: 1.8rem;
+}
+
+.welcome-form h3 {
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  color: #555;
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-weight: 600;
+  margin: 0.8rem 0 0.3rem;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 4px rgba(25, 118, 210, 0.3);
+}
+
+button {
+  width: 100%;
+  margin-top: 1.2rem;
+  background: #1976d2;
+  color: white;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background: #1565c0;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+a {
+  display: block;
+  margin-top: 1rem;
+  text-decoration: none;
+  color: #1976d2;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #0d47a1;
+}

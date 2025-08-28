@@ -1,0 +1,45 @@
+<div class="signup-container">
+  <form (ngSubmit)="onSubmit()" #signupForm="ngForm" class="signup-form">
+    <h2>Please Enter The Information Below</h2>
+
+    <div class="form-grid">
+      <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" [(ngModel)]="user.username" required/>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" [(ngModel)]="user.password" required/>
+
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" name="firstname" [(ngModel)]="user.firstname" required/>
+        
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" [(ngModel)]="user.city" required/>
+
+        <label for="phonenumber">Phone Number</label>
+        <input type="text" id="phonenumber" name="phonenumber" pattern="[0-9]+" [(ngModel)]="user.phonenumber" required/>
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" [(ngModel)]="user.email" required/>
+
+        <label for="confirmpassword">Confirm Password</label>
+        <input type="password" id="confirmpassword" name="confirmpassword" required/>
+
+        <label for="lastname">Last Name</label>
+        <input type="text" id="lastname" name="lastname" [(ngModel)]="user.lastname" required/>
+
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" [(ngModel)]="user.address" required/>
+        
+        <label for="afm">AFM</label>
+        <input type="number" id="afm" name="afm" [(ngModel)]="user.afm" required/>
+      </div>
+    </div>
+
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <p *ngIf="message">{{message}}</p>
+</div>

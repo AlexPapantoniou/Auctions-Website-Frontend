@@ -1,0 +1,31 @@
+<div class="welcome-container">
+  <form (ngSubmit)="onSubmit()" #welcomeForm="ngForm" class="welcome-form">
+    <h2>Welcome</h2>
+    <h3>Please Sign In</h3>
+
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" [(ngModel)]="username" required/>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" [(ngModel)]="password" required/>
+
+    <button type="submit">Sign In</button>
+    <a routerLink="/app-signup">or create a new account.</a>
+  </form>
+
+</div>
+
+<!-- <header>
+  <h1>Welcome</h1>
+</header>
+<main>
+  <h1><strong>Please sign in</strong></h1>
+  <form id = "sign_in_form" method = "get">
+    <input type = "text" id = "username" placeholder = "Username" required />
+    <br><br>
+    <input type = "password" id = "password" placeholder = "Password" required />
+    <br><br>
+    <a routerLink="/app-main-visitor"><button type = "submit">Sign In</button></a>
+    <br><br>
+  </form>
+</main> -->

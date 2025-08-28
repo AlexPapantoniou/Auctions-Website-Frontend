@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+header nav {
+  display: flex;
+  justify-content: center;  /* centers the nav items */
+  gap: 1rem;
+}
+
+body {
+  background: #f9fafc;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background: linear-gradient(90deg, #1976d2, #2196f3);
+  padding: 1rem 2rem;
+  color: white;
+}
+
+header nav {
+  display: flex;
+  gap: 1rem;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+header a:hover {
+  opacity: 0.8;
+}
+
+/* Footer */
+footer {
+  margin-top: 2rem;
+  background: #222;
+  color: #bbb;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
