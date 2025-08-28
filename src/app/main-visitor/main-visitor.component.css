@@ -1,22 +1,59 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-}
-header {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 0;
+/* Container */
+.main-visitor-container {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
-main {
-  padding: 20px;
-  text-align: center;
+
+/* Heading */
+.main-visitor-container h1 {
+  font-size: 1.8rem;
+  color: #1976d2;
+  margin-bottom: 2rem;
 }
-footer {
-  text-align: center;
-  padding: 10px 0;
-  background-color: #333;
-  color: white;
+.main-visitor-container h3 {
+  font-size: 1rem;
+  color: #1976d2;
+  margin-bottom: 2rem;
+}
+
+/* Role selector */
+.role-selector {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.role-selector select {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.role-selector select:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 5px rgba(25, 118, 210, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .main-visitor-container {
+    padding: 1.5rem;
+    margin: 2rem auto;
+  }
+
+  .main-visitor-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .role-selector select {
+    width: 100%;
+  }
 }

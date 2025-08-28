@@ -18,8 +18,11 @@ export class WelcomeComponent {
   onSubmit(): void {
     this.userService.login(this.username, this.password).subscribe({
       next: (user) => {
-        this.message = `Welcome back, $(user.firstname)!`;
-        this.router.navigate(['/app-main-visitor']);
+        if (user.username === 'admin') {
+          this.router.navigate(['/app-admin']);
+        } else {
+          this.router.navigate(['/app-main-visitor']);
+        }
       },
       error: (err) => {
         console.error(err);

@@ -1,14 +1,13 @@
-<header>
-    <h1>Welcome to the Main Visitor Page</h1>
-</header>
-<main>
-    <p>This is the main visitor page where you can explore various features.</p>
-    <br>
-    <p>What are we feeling like today?</p>
-    <select name = "visitor_type" id = "visitor_type" (change) = "onVisitorTypeChange($event)" >
-        <option value = "">-- Select --</option>
-        <option value = "visitor">Visitor</option>
-        <option value = "bidder">Bidder</option>
-        <option value = "seller">Seller</option>
-    </select>
-</main>
+<div class="main-visitor-container">
+    <h1>Please select the way of your tour in our site</h1>
+    <h3>You can always come back and choose another way in the future</h3>
+    
+    <div class="role-selector">
+        <select name = "visitor_type" id = "visitor_type" (change) = "onVisitorTypeChange($event)" >
+            <option value = "">-- Select --</option>
+            <option value = "visitor">Visitor</option>
+            <option value = "bidder">Bidder</option>
+            <option value = "seller">Seller</option>
+        </select>
+    </div>
+</div>

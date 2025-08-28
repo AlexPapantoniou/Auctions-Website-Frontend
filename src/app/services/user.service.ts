@@ -12,6 +12,7 @@ export interface User {
   email: string;
   phonenumber: string;
   afm: string;
+  accepted: boolean;
 }
 
 @Injectable({
