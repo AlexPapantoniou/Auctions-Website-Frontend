@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing-module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { UserService } from './services/user.service';
+import { AdminService } from './services/admin.service';
 
 @NgModule({
   declarations: [

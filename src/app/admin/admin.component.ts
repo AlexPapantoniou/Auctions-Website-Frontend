@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AdminService, User } from '../services/admin.service';
 
 @Component({
   selector: 'app-admin',
@@ -6,6 +7,41 @@ import { Component } from '@angular/core';
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
 
+  users: User[] = [];
+  message: string = '';
+
+  constructor(private adminService: AdminService) {}
+
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
+    this.adminService.getAllUsers().subscribe({
+      next: (users) => this.users = users,
+      error: (err) => console.error(err)
+    });
+  }
+
+  acceptUser(userid: number): void {
+    this.adminService.acceptUser(userid).subscribe({
+      next: () => {
+        this.message = `User ${userid} accepted!`;
+        this.loadUsers();
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  deleteUser(userid: number): void {
+    this.adminService.deleteUser(userid).subscribe({
+      next: () => {
+        this.message = `User ${userid} deleted!`;
+        this.loadUsers();
+      },
+      error: (err) => console.error(err)
+    });
+  }
 }
