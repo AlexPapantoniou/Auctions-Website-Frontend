@@ -29,10 +29,10 @@ export class AdminService {
   }
 
   acceptUser(userid: number): Observable<User> {
-    return this.http.put<User>(`${this.baseUrl}/accept/${userid}`, {});
+    return this.http.put<User>(`${this.baseUrl}/users/${userid}/accept`, {});
   }
 
   deleteUser(userid: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/delete/${userid}`);
+    return this.http.delete<void>(`${this.baseUrl}/users/${userid}/delete`);
   }
 }

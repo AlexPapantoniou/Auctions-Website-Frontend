@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './signup.component.css',
 })
 export class SignupComponent {
-  user: User = { userid: 0, username: '', password: '', firstname: '', lastname: '', city: '', address: '', email: '', phonenumber: '', afm: '', accepted: false };
+  user: User = { username: '', password: '', firstname: '', lastname: '', city: '', address: '', email: '', phonenumber: '', afm: '', accepted: false };
   message: string = '';
 
   constructor(private userService: UserService, private router: Router) {}
@@ -17,8 +17,7 @@ export class SignupComponent {
   onSubmit(): void {
     this.userService.signup(this.user).subscribe({
       next: (savedUser) => {
-        this.message = `User ${savedUser.username} registered successfully!`;
-        this.user = { userid: 0, username: '', password: '', firstname: '', lastname: '', city: '', address: '', email: '', phonenumber: '', afm: '', accepted: false };
+        this.user = { username: '', password: '', firstname: '', lastname: '', city: '', address: '', email: '', phonenumber: '', afm: '', accepted: false };
         this.router.navigate(['/app-waiting']);
       },
       error: (err) => {

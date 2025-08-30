@@ -28,7 +28,6 @@ export class AdminComponent implements OnInit {
   acceptUser(userid: number): void {
     this.adminService.acceptUser(userid).subscribe({
       next: () => {
-        this.message = `User ${userid} accepted!`;
         this.loadUsers();
       },
       error: (err) => console.error(err)
@@ -38,7 +37,6 @@ export class AdminComponent implements OnInit {
   deleteUser(userid: number): void {
     this.adminService.deleteUser(userid).subscribe({
       next: () => {
-        this.message = `User ${userid} deleted!`;
         this.loadUsers();
       },
       error: (err) => console.error(err)

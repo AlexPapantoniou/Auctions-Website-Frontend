@@ -25,8 +25,16 @@ export class WelcomeComponent {
         }
       },
       error: (err) => {
-        console.error(err);
-        this.message = `Login failed: ${err.message}`;
+        let errorMessage = 'Login failed';
+        if (err.error) {
+          if (typeof err.error === 'string') {
+            errorMessage = err.error;
+          }
+          else if (err.error.message) {
+            errorMessage = err.error.message;
+          }
+        }
+        alert("Login failed: " + errorMessage);
       }
     })
   }
