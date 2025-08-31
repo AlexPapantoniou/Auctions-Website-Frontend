@@ -1,0 +1,172 @@
+/* ---------------- NAVIGATION ---------------- */
+.navigation {
+  background: #f8fafc;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.nav-link {
+  color: #9ca3af; /* gray out */
+  text-decoration: none;
+  font-weight: 600;
+  cursor: not-allowed;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #6b7280; /* darker gray when hovered */
+}
+
+/* Tooltip on hover */
+.nav-link::after {
+  content: "Connect as a seller to create new auctions";
+  position: absolute;
+  bottom: -2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.nav-link:hover::after {
+  opacity: 1;
+}
+
+/* ---------------- CONTAINER ---------------- */
+.auctions-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.auctions-container h2 {
+  text-align: center;
+  color: #1976d2;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------------- SEARCH + FILTER ---------------- */
+.search-filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* allows wrapping on small screens */
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.auctions-container input[type="text"],
+.auctions-container select {
+  padding: 0.6rem 0.8rem;
+  margin: 0.5rem 0.5rem 1rem 0;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auctions-container input[type="text"]:focus,
+.auctions-container select:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+}
+
+.auctions-container button {
+  padding: 0.6rem 1rem;
+  margin-left: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background: #1976d2;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.auctions-container button:hover {
+  background: #1565c0;
+}
+.auctions-container button:active {
+  transform: scale(0.97);
+}
+
+/* ---------------- AUCTION CARD ---------------- */
+.auction-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  border: 1px solid #e5e7eb;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.auction-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.auction-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  color: #1e293b;
+}
+
+.auction-card p {
+  color: #4b5563;
+  margin-bottom: 0.8rem;
+}
+
+/* Details button inside card */
+.auction-card button {
+  background: #1976d2;
+  color: #fff;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.auction-card button:hover { background: #1565c0; }
+
+/* ---------------- PAGINATION ---------------- */
+.pagination {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.pagination button {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #374151;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #f3f4f6;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-weight: 600;
+  color: #374151;
+}

@@ -9,6 +9,7 @@ import { VisitorComponent } from './visitor/visitor.component';
 import { BidderComponent } from './bidder/bidder.component';
 import { SellerComponent } from './seller/seller.component';
 import { AdminComponent } from './admin/admin.component';
+import { AuctionDetailsComponent } from './auction-details/auction-details.component';
 
 export const routes: Routes = [ 
   {
@@ -48,6 +49,10 @@ export const routes: Routes = [
     path: 'app-admin',
     component: AdminComponent
   },
+  {
+    path: 'app-auction-details',
+    component: AuctionDetailsComponent
+  }
 ]; 
 
 @NgModule({

@@ -1,0 +1,10 @@
+<div *ngIf="auction">
+  <h2>{{ auction.item.name }}</h2>
+  <p>{{ auction.description }}</p>
+  <p><b>Seller:</b> {{ auction.seller.username }}</p>
+  <p><b>Start Time:</b> {{ auction.startTime }}</p>
+  <p><b>End Time:</b> {{ auction.endTime }}</p>
+  <p><b>First Bid:</b> {{ auction.firstBid }}</p>
+  <p><b>Current Bid:</b> {{ auction.currentBid }}</p>
+  <p><b>Number of Bids:</b> {{ auction.numberOfBids }}</p>
+</div>

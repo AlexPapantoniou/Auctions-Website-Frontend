@@ -1,1 +1,28 @@
-<p>visitor works!</p>
+<div class="navigation">
+    <a routerLink="/app-seller" class="nav-link">Create New Auction</a>
+</div>
+<div class="auctions-container">
+    <h2>Here are the currently active auctions</h2>
+
+    <div class="search-filter-container">
+        <input type="text" [(ngModel)]="keyword" placeholder="Search auctions by name, category or description..." />
+        <button (click)="search()">Search</button>
+
+        <select [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+            <option value="">All Categories</option>
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+    </div>
+
+    <div *ngFor="let auction of auctions" class="auction-card">
+        <h3>{{ auction.item.name }}</h3>
+        <p>{{ auction.item.description }}</p>
+        <button [routerLink]="['/app-auction-details', auction.auctionid]">Details</button>
+    </div>
+
+    <div class="pagination">
+        <button (click)="prevPage()" [disabled]="page === 1">Previous</button>
+        <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="page >= totalPages - 1">Next</button>
+    </div>
+</div>

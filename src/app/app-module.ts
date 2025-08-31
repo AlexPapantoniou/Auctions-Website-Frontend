@@ -9,6 +9,7 @@ import { VisitorComponent } from './visitor/visitor.component';
 import { BidderComponent } from './bidder/bidder.component';
 import { SellerComponent } from './seller/seller.component';
 import { AdminComponent } from './admin/admin.component';
+import { AuctionDetailsComponent } from './auction-details/auction-details.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { UserService } from './services/user.service';
 import { AdminService } from './services/admin.service';
+import { AuctionService } from './services/auction.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { AdminService } from './services/admin.service';
     BidderComponent,
     SellerComponent,
     AdminComponent,
+    AuctionDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import { AdminService } from './services/admin.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, AdminService, AuctionService],
   bootstrap: [AppComponent]
 })
 
