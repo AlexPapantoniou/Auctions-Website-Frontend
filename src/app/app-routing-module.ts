@@ -50,7 +50,7 @@ export const routes: Routes = [
     component: AdminComponent
   },
   {
-    path: 'app-auction-details',
+    path: 'app-auction-details/:id',
     component: AuctionDetailsComponent
   }
 ]; 

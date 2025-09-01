@@ -1,0 +1,41 @@
+:host {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+div {
+  background-color: #f2f2f2;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 8px 0;
+  color: #555;
+}
+
+b {
+  color: #222;
+}
+
+@media (max-width: 650px) {
+  div {
+    padding: 20px;
+  }
+  p {
+    font-size: 14px;
+  }
+}

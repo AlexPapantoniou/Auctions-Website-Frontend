@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuctionService {
-  private apiUrl = 'http://localhost"8080/auctions';
+  private apiUrl = 'http://localhost:8080/auctions';
 
   constructor(private http: HttpClient) {};
 
@@ -15,11 +15,11 @@ export class AuctionService {
   }
 
   searchAuctions(keyword: string, page:number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/search?keyword:${keyword}&page=${page}&size=${size}`);
+    return this.http.get(`${this.apiUrl}/search?keyword=${keyword}&page=${page}&size=${size}`);
   }
 
   getAuctionsByCategory(category: string, page:number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/category?category:${category}&page=${page}&size=${size}`);
+    return this.http.get(`${this.apiUrl}/category?category=${encodeURIComponent(category)}&page=${page}&size=${size}`);
   }
 
   getAuctionById(id: number): Observable<any> {

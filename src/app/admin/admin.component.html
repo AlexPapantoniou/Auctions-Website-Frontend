@@ -35,13 +35,13 @@
                     <td>
                         <button 
                             *ngIf="!user.accepted" 
-                            (click)="acceptUser(user.userid)"
+                            (click)="acceptUser(user.userid!)"
                             [disabled]="user.accepted"
                             class="accept-btn">
                             Accept
                         </button>
                         <button 
-                            (click)="deleteUser(user.userid)"
+                            (click)="deleteUser(user.userid!)"
                             class="reject-btn">
                             Reject
                         </button>

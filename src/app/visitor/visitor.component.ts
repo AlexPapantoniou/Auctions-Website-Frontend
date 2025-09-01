@@ -11,7 +11,7 @@ import { CategoryService } from '../services/category.service';
 export class VisitorComponent {
   auctions: any[] = [];
   page = 0;
-  size = 5;
+  size = 3;
   totalPages = 0;
   
   keyword = '';
