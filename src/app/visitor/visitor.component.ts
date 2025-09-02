@@ -1,6 +1,8 @@
+import { UserService } from './../services/user.service';
 import { Component } from '@angular/core';
 import { AuctionService } from '../services/auction.service';
 import { CategoryService } from '../services/category.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-visitor',
@@ -9,6 +11,7 @@ import { CategoryService } from '../services/category.service';
   styleUrl: './visitor.component.css'
 })
 export class VisitorComponent {
+  user: any;
   auctions: any[] = [];
   page = 0;
   size = 3;
@@ -20,11 +23,19 @@ export class VisitorComponent {
   selectedCategory = '';
 
   constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
     private auctionService: AuctionService,
     private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
+    const userid = Number(this.route.snapshot.params['id']);
+    if (userid) {
+      this.userService.getUserById(userid).subscribe(data => {
+        this.user = data;
+      });
+    }
     this.loadAuctions();
     this.loadCategories();
   }

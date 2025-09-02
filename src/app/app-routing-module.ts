@@ -9,6 +9,7 @@ import { VisitorComponent } from './visitor/visitor.component';
 import { BidderComponent } from './bidder/bidder.component';
 import { SellerComponent } from './seller/seller.component';
 import { AdminComponent } from './admin/admin.component';
+import { CreateAuctionComponent } from './create-auction/create-auction.component';
 import { AuctionDetailsComponent } from './auction-details/auction-details.component';
 
 export const routes: Routes = [ 
@@ -30,24 +31,28 @@ export const routes: Routes = [
     component: WaitingComponent
   },
   {
-    path: 'app-main-visitor',
+    path: 'app-main-visitor/:id',
     component: MainVisitorComponent
   },
   {
-    path: 'app-visitor',
+    path: 'app-visitor/:id',
     component: VisitorComponent
   },
   {
-    path: 'app-bidder',
+    path: 'app-bidder/:id',
     component: BidderComponent
   },
   {
-    path: 'app-seller',
+    path: 'app-seller/:id',
     component: SellerComponent
   },
   {
     path: 'app-admin',
     component: AdminComponent
+  },
+  {
+    path: 'app-create-auction/:id',
+    component: CreateAuctionComponent
   },
   {
     path: 'app-auction-details/:id',

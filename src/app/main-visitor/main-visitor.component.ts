@@ -1,5 +1,6 @@
+import { UserService } from './../services/user.service';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-main-visitor',
@@ -8,21 +9,37 @@ import { Router } from '@angular/router';
   styleUrl: './main-visitor.component.css'
 })
 export class MainVisitorComponent {
-  constructor(private router: Router) {};
+  user: any;
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {};
+
+  ngOnInit(): void {
+    const userid = Number(this.route.snapshot.params['id']);
+    if (userid) {
+      this.userService.getUserById(userid).subscribe(data => {
+        this.user = data;
+        console.log(this.user.firstname);
+      });
+    }
+  }
 
   onVisitorTypeChange(event: Event) {
     const option = (event.target as HTMLSelectElement).value;
     if (option === "visitor") {
-      this.router.navigate(['app-visitor']);
+      this.router.navigate(['app-visitor', this.user.userid]);
     }
     else if (option === "bidder") {
-      this.router.navigate(['app-bidder']);
+      this.router.navigate(['app-bidder', this.user.userid]);
     }
     else if (option === "seller") {
-      this.router.navigate(['app-seller']);
+      this.router.navigate(['app-seller', this.user.userid]);
     }
     else {
-      this.router.navigate(['app-main-visitor']);
+      this.router.navigate(['app-main-visitor', this.user.userid]);
     }
   }
 }

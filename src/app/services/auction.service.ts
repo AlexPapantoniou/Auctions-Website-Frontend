@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { Auction } from '../model/auction.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,5 +26,9 @@ export class AuctionService {
 
   getAuctionById(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
+  addAuction(auction: Auction): Observable<Auction> {
+    return this.http.post<Auction>(`${this.apiUrl}/addauction`, auction);
   }
 }

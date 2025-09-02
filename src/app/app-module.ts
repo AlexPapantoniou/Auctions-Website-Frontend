@@ -9,6 +9,7 @@ import { VisitorComponent } from './visitor/visitor.component';
 import { BidderComponent } from './bidder/bidder.component';
 import { SellerComponent } from './seller/seller.component';
 import { AdminComponent } from './admin/admin.component';
+import { CreateAuctionComponent } from './create-auction/create-auction.component';
 import { AuctionDetailsComponent } from './auction-details/auction-details.component';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -31,7 +32,8 @@ import { AuctionService } from './services/auction.service';
     BidderComponent,
     SellerComponent,
     AdminComponent,
-    AuctionDetailsComponent
+    AuctionDetailsComponent,
+    CreateAuctionComponent
   ],
   imports: [
     BrowserModule,

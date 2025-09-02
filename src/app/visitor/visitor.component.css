@@ -1,51 +1,14 @@
-/* ---------------- NAVIGATION ---------------- */
-.navigation {
-  background: #f8fafc;
-  padding: 0.8rem 1rem;
-  border-bottom: 1px solid #e2e8f0;
-  text-align: center;
-}
-
-.nav-link {
-  color: #9ca3af; /* gray out */
-  text-decoration: none;
-  font-weight: 600;
-  cursor: not-allowed;
-  position: relative;
-  transition: color 0.2s ease;
-}
-
-.nav-link:hover {
-  color: #6b7280; /* darker gray when hovered */
-}
-
-/* Tooltip on hover */
-.nav-link::after {
-  content: "Connect as a seller to create new auctions";
-  position: absolute;
-  bottom: -2.2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1e293b;
-  color: #fff;
-  font-size: 0.75rem;
-  padding: 0.35rem 0.6rem;
-  border-radius: 6px;
-  opacity: 0;
-  white-space: nowrap;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-
-.nav-link:hover::after {
-  opacity: 1;
-}
-
 /* ---------------- CONTAINER ---------------- */
 .auctions-container {
   max-width: 1000px;
   margin: 2rem auto;
   padding: 0 1rem;
+}
+
+.auctions-container h1 {
+  text-align: center;
+  color: #1976d2;
+  margin-bottom: 1.5rem;
 }
 
 .auctions-container h2 {
@@ -125,18 +88,6 @@
   color: #4b5563;
   margin-bottom: 0.8rem;
 }
-
-/* Details button inside card */
-.auction-card button {
-  background: #1976d2;
-  color: #fff;
-  padding: 0.45rem 0.9rem;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-.auction-card button:hover { background: #1565c0; }
 
 /* ---------------- PAGINATION ---------------- */
 .pagination {

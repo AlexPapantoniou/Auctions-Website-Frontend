@@ -13,7 +13,10 @@ export class WelcomeComponent {
   password: string = '';
   message: string = '';
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   onSubmit(): void {
     this.userService.login(this.username, this.password).subscribe({
@@ -21,7 +24,7 @@ export class WelcomeComponent {
         if (user.username === 'admin') {
           this.router.navigate(['/app-admin']);
         } else {
-          this.router.navigate(['/app-main-visitor']);
+          this.router.navigate(['/app-main-visitor', user.userid]);
         }
       },
       error: (err) => {

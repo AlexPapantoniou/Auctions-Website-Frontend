@@ -20,6 +20,10 @@ export class UserService {
     return this.http.get<User[]>(`${this.apiUrl}/users`);
   }
 
+  getUserById(userid: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/users/${userid}`);
+  }
+
   login(username: string, password: string): Observable<User> {
     const body = { username: username, password: password };
     return this.http.post<User>(`${this.apiUrl}/login`, body);

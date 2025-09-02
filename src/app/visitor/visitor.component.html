@@ -1,7 +1,5 @@
-<div class="navigation">
-    <a routerLink="/app-seller" class="nav-link">Create New Auction</a>
-</div>
 <div class="auctions-container">
+    <h1>Welcome back {{ user.firstname }}!</h1>
     <h2>Here are the currently active auctions</h2>
 
     <div class="search-filter-container">
@@ -17,7 +15,6 @@
     <div *ngFor="let auction of auctions" class="auction-card">
         <h3>{{ auction.item.name }}</h3>
         <p>{{ auction.item.description }}</p>
-        <button [routerLink]="['/app-auction-details', auction.auctionid]">Details</button>
     </div>
 
     <div class="pagination">
