@@ -1,0 +1,30 @@
+<div *ngIf="auction">
+  <h1>{{ auction.item.name }} - List of past bids</h1>
+
+  <div *ngIf="bids.length > 0; else noBids">
+    <div *ngFor="let bid of bids" class="bid-card">
+      <p><b>Amount:</b> {{ bid.amount }}</p>
+      <p><b>Time:</b> {{ bid.time }}</p>
+      <p><b>Bidder:</b> {{ bid.bidder.username }} (Rating: {{ bid.bidder.rating }})</p>
+    </div>
+
+    <div class="pagination">
+      <button (click)="prevBidPage()" [disabled]="bidPage === 0">Previous</button>
+      <span>Page {{ bidPage + 1 }} of {{ totalBidPages }}</span>
+      <button (click)="nextBidPage()" [disabled]="bidPage >= totalBidPages - 1">Next</button>
+    </div>
+  </div>
+
+  <ng-template #noBids>
+    <p>No bids yet for this auction.</p>
+  </ng-template>
+
+  <div class="new-bid">
+    <form (ngSubmit)="submitBid()" #bidForm="ngForm">
+      <label for="bidAmount">New Bid Amount:</label>
+      <input type="number" id="bidAmount" [(ngModel)]="newBidAmount" name="bidAmount" required min="{{ auction.currentPrice + 1 }}" />
+      <button type="submit" [disabled]="!bidForm.valid">Submit Bid</button>
+    </form>
+  </div>
+
+</div>

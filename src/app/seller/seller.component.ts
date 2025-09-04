@@ -79,6 +79,10 @@ export class SellerComponent {
     }
   }
 
+  viewAuctionDetails(auctionid: number): void {
+    this.router.navigate(['/app-auction-details', auctionid]);
+  }
+
   nextPage() {
     if (this.page < this.totalPages - 1) {
       this.page++;

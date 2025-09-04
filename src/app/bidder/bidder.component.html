@@ -1,1 +1,33 @@
-<p>bidder works!</p>
+<div class="auctions-container">
+    <div *ngIf="user">
+        <h1>Welcome back {{ user.firstname }}!</h1>
+        <h2>Here are the currently active auctions</h2>
+    </div>
+
+    <div class="search-filter-container">
+        <input type="text" [(ngModel)]="keyword" placeholder="Search auctions by name, category or description..." />
+        <button (click)="search()">Search</button>
+
+        <select [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+            <option value="">All Categories</option>
+            <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+        </select>
+    </div>
+
+    <div *ngFor="let auction of auctions" class="auction-card">
+        <h3>{{ auction.item.name }}</h3>
+        <p>{{ auction.item.description }}</p>
+
+        <div class="actions-buttons">
+            <button (click)="viewAuctionDetails(auction.auctionid)">Details</button>
+            <button (click)="placeBid(auction.auctionid)">Place bid</button>
+        </div>
+    </div>
+
+    <div class="pagination">
+        <button (click)="prevPage()" [disabled]="page < 1">Previous</button>
+        <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="page >= totalPages - 1">Next</button>
+    </div>
+
+</div>

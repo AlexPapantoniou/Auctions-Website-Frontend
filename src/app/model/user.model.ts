@@ -6,8 +6,10 @@ export interface User {
   lastname: string;
   email: string;
   city: string;
-  address: string;
+  country: string;
   phonenumber: string;
   afm: string;
   accepted: boolean;
+  bidderRating?: number;
+  sellerRating?: number;
 }

@@ -1,10 +1,35 @@
 <div *ngIf="auction">
-  <h2>{{ auction.item.name }}</h2>
-  <p>{{ auction.description }}</p>
-  <p><b>Seller:</b> {{ auction.seller.username }}</p>
+  <h1>Details for {{ auction.item.name }}'s auction</h1>
+  <p><b>Item id:</b> {{ auction.item.itemid }}</p>
+  <p><b>Item name:</b> {{ auction.item.name }}</p>
+  <div class="item-categories">
+    <h3>Categories:</h3>
+    <div *ngFor="let category of auction.item.categories">
+      <p><b>Category:</b> {{ category.name }}</p>
+    </div>
+  </div>
+  <p><b>Currently:</b> {{ auction.currentBid }}</p>
+  <p><b>First bid:</b> {{ auction.firstBid }}</p>
+  <p><b>Number of Bids:</b> {{ auction.numberOfBids }}</p>
+  <div class="past-bids">
+    <h3>List of past bids:</h3>
+    <div *ngFor="let bid of auction.bids">
+      <div class="bid">
+        <div class="bidder">
+          <p><b>Bidder rating:</b> {{ bid.bidder.rating }}</p>
+          <p><b>Bidder username:</b> {{ bid.bidder.username }}</p>
+          <p><b>Bidder location:</b> {{ bid.bidder.city }}</p>
+          <p><b>Bidder country:</b> {{ bid.bidder.country }}</p>
+        </div>
+        <p><b>Time:</b> {{ bid.time }}</p>
+        <p><b>Amount:</b> {{ bid.amount }}</p>
+      </div>
+    </div>
+  </div>
+  <p><b>Location:</b> {{ auction.item.location }}</p>
+  <p><b>Country:</b> {{ auction.item.country }}</p>
   <p><b>Start Time:</b> {{ auction.startTime }}</p>
   <p><b>End Time:</b> {{ auction.endTime }}</p>
-  <p><b>First Bid:</b> {{ auction.firstBid }}</p>
-  <p><b>Current Bid:</b> {{ auction.currentBid }}</p>
-  <p><b>Number of Bids:</b> {{ auction.numberOfBids }}</p>
+  <p><b>Seller rating:</b> {{ auction.seller.sellerRating }}</p>
+  <p><b>Description:</b> {{ auction.item.description }}</p>
 </div>

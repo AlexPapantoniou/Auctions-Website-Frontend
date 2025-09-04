@@ -20,6 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { AdminService } from './services/admin.service';
 import { AuctionService } from './services/auction.service';
+import { ItemService } from './services/item.service';
+import { PlaceBidComponent } from './place-bid/place-bid.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { AuctionService } from './services/auction.service';
     SellerComponent,
     AdminComponent,
     AuctionDetailsComponent,
-    CreateAuctionComponent
+    CreateAuctionComponent,
+    PlaceBidComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,7 @@ import { AuctionService } from './services/auction.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService, AdminService, AuctionService],
+  providers: [UserService, AdminService, AuctionService, ItemService],
   bootstrap: [AppComponent]
 })
 

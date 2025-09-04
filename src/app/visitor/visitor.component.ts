@@ -2,7 +2,7 @@ import { UserService } from './../services/user.service';
 import { Component } from '@angular/core';
 import { AuctionService } from '../services/auction.service';
 import { CategoryService } from '../services/category.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-visitor',
@@ -24,6 +24,7 @@ export class VisitorComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private userService: UserService,
     private auctionService: AuctionService,
     private categoryService: CategoryService
@@ -75,6 +76,10 @@ export class VisitorComponent {
     else {
       this.loadAuctions();
     }
+  }
+
+  viewAuctionDetails(auctionid: number): void {
+    this.router.navigate(['/app-auction-details', auctionid]);
   }
 
   nextPage() {

@@ -11,6 +11,7 @@ import { SellerComponent } from './seller/seller.component';
 import { AdminComponent } from './admin/admin.component';
 import { CreateAuctionComponent } from './create-auction/create-auction.component';
 import { AuctionDetailsComponent } from './auction-details/auction-details.component';
+import { PlaceBidComponent } from './place-bid/place-bid.component';
 
 export const routes: Routes = [ 
   {
@@ -57,6 +58,10 @@ export const routes: Routes = [
   {
     path: 'app-auction-details/:id',
     component: AuctionDetailsComponent
+  },
+  {
+    path: 'app-place-bid/:auctionid/:userid',
+    component: PlaceBidComponent
   }
 ]; 
 
