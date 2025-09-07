@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AuctionService } from '../services/auction.service';
 import { CategoryService } from '../services/category.service';
-import { ItemService } from '../services/item.service';
 
 @Component({
   selector: 'app-seller',
@@ -23,7 +22,6 @@ export class SellerComponent {
 
   categories: any[] = [];
   selectedCategory = '';
-
   locations: string[] = [];
   selectedLocation = '';
   countries: string[] = [];
@@ -138,6 +136,8 @@ export class SellerComponent {
   clearFilters(): void {
     this.keyword = '';
     this.selectedCategory = '';
+    this.selectedLocation = '';
+    this.selectedCountry = '';
     this.loadAuctions();
   }
   

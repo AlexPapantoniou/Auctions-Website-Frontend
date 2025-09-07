@@ -1,15 +1,42 @@
 <div class="auctions-container">
-    <h1>Welcome back {{ user?.firstname }}!</h1>
-    <h2>Here are the currently active auctions</h2>
+    <div *ngIf="user">
+        <h1>Welcome back {{ user?.firstname }}!</h1>
+        <h2>Here are the currently active auctions</h2>
+    </div>
 
     <div class="search-filter-container">
-        <input type="text" [(ngModel)]="keyword" placeholder="Search auctions by name, category or description..." />
-        <button (click)="search()">Search</button>
+        <!-- Row 1: Search -->
+        <div class="search-row">
+            <input
+            type="text"
+            [(ngModel)]="keyword"
+            placeholder="Search auctions by name, category or description..."
+            />
+            <button (click)="search()">Search</button>
+        </div>
 
-        <select [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+        <!-- Row 2: Select filters -->
+        <div class="filters-row">
+            <select [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
             <option value="">All Categories</option>
-            <option *ngFor="let category of categories" [value]="category.name">{{ category?.name }}</option>
-        </select>
+            <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+            </select>
+
+            <select [(ngModel)]="selectedLocation" (change)="onLocationChange()">
+            <option value="">All Locations</option>
+            <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+            </select>
+
+            <select [(ngModel)]="selectedCountry" (change)="onCountryChange()">
+            <option value="">All Countries</option>
+            <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
+            </select>
+        </div>
+
+        <!-- Row 3: Clear filters -->
+        <div class="clear-row">
+            <button class="clear-filters" (click)="clearFilters()">Clear Filters</button>
+        </div>
     </div>
 
     <div *ngFor="let auction of auctions" class="auction-card">

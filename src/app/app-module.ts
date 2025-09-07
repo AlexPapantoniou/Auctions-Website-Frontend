@@ -22,7 +22,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { AdminService } from './services/admin.service';
 import { AuctionService } from './services/auction.service';
-import { ItemService } from './services/item.service';
 import { EditAuctionComponent } from './edit-auction/edit-auction.component';
 
 @NgModule({
@@ -48,7 +47,7 @@ import { EditAuctionComponent } from './edit-auction/edit-auction.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService, AdminService, AuctionService, ItemService],
+  providers: [UserService, AdminService, AuctionService],
   bootstrap: [AppComponent]
 })
 

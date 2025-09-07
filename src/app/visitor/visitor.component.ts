@@ -21,6 +21,10 @@ export class VisitorComponent {
   
   categories: any[] = [];
   selectedCategory = '';
+  locations: string[] = [];
+  selectedLocation = '';
+  countries: string[] = [];
+  selectedCountry = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -54,6 +58,18 @@ export class VisitorComponent {
     });
   }
 
+  loadLocations(): void {
+    this.auctionService.getAllLocations().subscribe(data => {
+      this.locations = data;
+    });
+  }
+
+  loadCountries(): void {
+    this.auctionService.getAllCountries().subscribe(data => {
+      this.countries = data;
+    });
+  }
+
   search(): void {
     if (this.keyword.trim() !== '') {
       this.auctionService.searchAuctions(this.keyword, this.page, this.size).subscribe(data => {
@@ -76,6 +92,38 @@ export class VisitorComponent {
     else {
       this.loadAuctions();
     }
+  }
+
+  onLocationChange(): void {
+    if (this.selectedLocation) {
+      this.auctionService.getItemsByLocation(this.selectedLocation, this.page, this.size).subscribe(data => {
+        this.auctions = data.content;
+        this.totalPages = data.totalPages;
+      });
+    }
+    else {
+      this.loadAuctions();
+    }
+  }
+
+  onCountryChange(): void {
+    if (this.selectedCountry) {
+      this.auctionService.getItemsByCountry(this.selectedCountry, this.page, this.size).subscribe(data => {
+        this.auctions = data.content;
+        this.totalPages = data.totalPages;
+      });
+    }
+    else {
+      this.loadAuctions();
+    }
+  }
+
+  clearFilters(): void {
+    this.keyword = '';
+    this.selectedCategory = '';
+    this.selectedLocation = '';
+    this.selectedCountry = '';
+    this.loadAuctions();
   }
 
   viewAuctionDetails(auctionid: number): void {

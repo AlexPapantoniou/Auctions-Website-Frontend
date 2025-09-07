@@ -5,26 +5,39 @@
     </div>
 
     <div class="search-filter-container">
-        <input type="text" [(ngModel)]="keyword" placeholder="Search auctions by name, category or description..." />
-        <button (click)="search()">Search</button>
+        <!-- Row 1: Search -->
+        <div class="search-row">
+            <input
+            type="text"
+            [(ngModel)]="keyword"
+            placeholder="Search auctions by name, category or description..."
+            />
+            <button (click)="search()">Search</button>
+        </div>
 
-        <select [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+        <!-- Row 2: Select filters -->
+        <div class="filters-row">
+            <select [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
             <option value="">All Categories</option>
             <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
-        </select>
+            </select>
 
-        <select [(ngModel)]="selectedLocation" (change)="onLocationChange()">
+            <select [(ngModel)]="selectedLocation" (change)="onLocationChange()">
             <option value="">All Locations</option>
-            <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
-        </select>
+            <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+            </select>
 
-        <select [(ngModel)]="selectedCountry" (change)="onCountryChange()">
+            <select [(ngModel)]="selectedCountry" (change)="onCountryChange()">
             <option value="">All Countries</option>
-            <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
-        </select>
+            <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
+            </select>
+        </div>
 
-        <button (click)="myAuctions()">My auctions</button>
-        <button (click)="clearFilters()">Clear Filters</button>
+        <!-- Row 3: Clear filters -->
+        <div class="clear-row">
+            <button (click)="myAuctions()">My auctions</button>
+            <button class="clear-filters" (click)="clearFilters()">Clear Filters</button>
+        </div>
     </div>
 
     <div *ngFor="let auction of auctions" class="auction-card">
@@ -38,7 +51,7 @@
 
         <ng-template #justDetails>
             <button (click)="viewAuctionDetails(auction.auctionid)">Details</button>
-        </ng-template>>
+        </ng-template>
     </div>
 
     <div class="pagination">

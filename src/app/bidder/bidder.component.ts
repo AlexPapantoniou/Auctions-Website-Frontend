@@ -22,6 +22,10 @@ export class BidderComponent {
 
   categories: any[] = [];
   selectedCategory = '';
+  locations: string[] = [];
+  selectedLocation = '';
+  countries: string[] = [];
+  selectedCountry = '';
 
   constructor (
     private route: ActivatedRoute,
@@ -40,6 +44,8 @@ export class BidderComponent {
     }
     this.loadAuctions();
     this.loadCategories();
+    this.loadLocations();
+    this.loadCountries();
   }
 
   loadAuctions(): void {
@@ -51,7 +57,19 @@ export class BidderComponent {
 
   loadCategories(): void {
     this.categoryService.getAllCategories().subscribe(data => {
-      this.auctions = data;
+      this.categories = data;
+    });
+  }
+
+  loadLocations(): void {
+    this.auctionService.getAllLocations().subscribe(data => {
+      this.locations = data;
+    });
+  }
+
+  loadCountries(): void {
+    this.auctionService.getAllCountries().subscribe(data => {
+      this.countries = data;
     });
   }
 
@@ -79,19 +97,51 @@ export class BidderComponent {
     }
   }
 
+  onLocationChange(): void {
+    if (this.selectedLocation) {
+      this.auctionService.getItemsByLocation(this.selectedLocation, this.page, this.size).subscribe(data => {
+        this.auctions = data.content;
+        this.totalPages = data.totalPages;
+      });
+    }
+    else {
+      this.loadAuctions();
+    }
+  }
+
+  onCountryChange(): void {
+    if (this.selectedCountry) {
+      this.auctionService.getItemsByCountry(this.selectedCountry, this.page, this.size).subscribe(data => {
+        this.auctions = data.content;
+        this.totalPages = data.totalPages;
+      });
+    }
+    else {
+      this.loadAuctions();
+    }
+  }
+
   viewAuctionDetails(auctionid: number): void {
     this.router.navigate(['/app-auction-details', auctionid]);
   }
-
+  
   placeBid(auctionid: number): void {
     const auction = this.auctions.find(a => a.auctionid === auctionid);
-
-    if (auction && auction.sellerId === this.user.userid) {
+    
+    if (auction && auction.seller.userid === this.user.userid) {
       alert("You cannot bid on your own auction.");
       return;
     }
-
+    
     this.router.navigate(['app-place-bid', auctionid, this.user.userid]);
+  }
+
+  clearFilters(): void {
+    this.keyword = '';
+    this.selectedCategory = '';
+    this.selectedLocation = '';
+    this.selectedCountry = '';
+    this.loadAuctions();
   }
 
   nextPage() {

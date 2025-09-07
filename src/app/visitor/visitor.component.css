@@ -1,131 +1,163 @@
-/* ---------------- CONTAINER ---------------- */
 .auctions-container {
   max-width: 1000px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
+/* Greeting */
 .auctions-container h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
   text-align: center;
-  color: #333;
-  margin-bottom: 1.5rem;
 }
 
 .auctions-container h2 {
-  text-align: center;
-  color: #555;
-  margin-bottom: 1.5rem;
-}
-
-
-/* Search and filter section */
-.search-filter-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  font-size: 20px;
   margin-bottom: 20px;
-  justify-content: center;
+  color: #444;
+  text-align: center;
 }
 
-.search-filter-container input[type="text"] {
-  flex: 1 1 250px;
-  padding: 8px 12px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+/* Search + Filters container */
+.search-filter-container {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.search-filter-container button {
+/* Row 1: Search bar */
+.search-row {
+  display: flex;
+  gap: 10px;
+}
+
+.search-row input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.search-row button {
   padding: 8px 16px;
   background-color: #007bff;
-  color: white;
   border: none;
-  border-radius: 5px;
+  color: white;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
 }
 
-.search-filter-container button:hover {
+.search-row button:hover {
   background-color: #0056b3;
 }
 
-.search-filter-container select {
-  padding: 8px 12px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+/* Row 2: Select filters */
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-/* ---------------- AUCTION CARD ---------------- */
+.filters-row select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+/* Row 3: Clear filters + My Auctions */
+.clear-row {
+  display: flex;
+  gap: 10px;
+}
+
+.clear-row button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.clear-row .clear-filters {
+  background-color: #dc3545; /* Clear button */
+  color: white;
+}
+
+.clear-row .clear-filters:hover {
+  background-color: #a71d2a;
+}
+
+/* Auction cards */
 .auction-card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-  border: 1px solid #e5e7eb;
-  padding: 1rem 1.2rem;
-  margin-bottom: 1rem;
-  transition: transform 0.15s ease, box-shadow 0.2s ease;
-}
-
-.auction-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
 }
 
 .auction-card h3 {
   margin-top: 0;
-  margin-bottom: 0.4rem;
-  color: #1e293b;
+  margin-bottom: 10px;
 }
 
 .auction-card p {
-  color: #4b5563;
-  margin-bottom: 0.8rem;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+/* Auction buttons */
+.auction-actions,
+.auction-card button {
+  display: flex;
+  gap: 10px;
 }
 
 .auction-card button {
-  background: #3b82f6;
-  color: #fff;
+  padding: 6px 14px;
   border: none;
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.15s ease;
 }
 
-.auction-card button:hover {
-  background: #2563eb;
+.auction-card button:nth-child(1) {
+  background-color: #007bff;
+  color: white;
 }
 
-/* ---------------- PAGINATION ---------------- */
+.auction-card button:nth-child(1):hover {
+  background-color: #0056b3;
+}
+
+.auction-card button:nth-child(2) {
+  background-color: #ffc107;
+  color: black;
+}
+
+.auction-card button:nth-child(2):hover {
+  background-color: #d39e00;
+}
+
+/* Pagination */
 .pagination {
-  margin-top: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.8rem;
+  margin-top: 20px;
+  gap: 10px;
 }
 
 .pagination button {
-  border: 1px solid #d1d5db;
-  background: #fff;
-  color: #374151;
+  padding: 6px 12px;
+  background-color: #007bff;
+  border: none;
+  color: white;
   border-radius: 6px;
-  padding: 0.5rem 0.9rem;
   cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.pagination button:hover:not(:disabled) {
-  background: #f3f4f6;
 }
 
 .pagination button:disabled {
-  opacity: 0.5;
+  background-color: #ccc;
   cursor: not-allowed;
-}
-
-.pagination span {
-  font-weight: 600;
-  color: #374151;
 }
