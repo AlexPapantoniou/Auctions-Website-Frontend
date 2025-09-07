@@ -28,7 +28,35 @@ export class AuctionService {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
+  getAuctionsBySeller(sellerId: number, page: number, size: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/seller/${sellerId}/auctions?page=${page}&size=${size}`);
+  }
+
+  getAllLocations(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/locations`);
+  }
+
+  getAllCountries(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/countries`);
+  }
+
+  getItemsByLocation(location: string, page: number, size: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/items/location/${location}?page=${page}&size=${size}`);
+  }
+
+  getItemsByCountry(country: string, page: number, size: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/items/country/${country}?page=${page}&size=${size}`);
+  }
+
   addAuction(auction: Auction): Observable<Auction> {
     return this.http.post<Auction>(`${this.apiUrl}/addauction`, auction);
+  }
+
+  updateAuction(auctionid: number, auction: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/update/${auctionid}`, auction);
+  }
+
+  deleteAuction(auctionid: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete/${auctionid}`);
   }
 }

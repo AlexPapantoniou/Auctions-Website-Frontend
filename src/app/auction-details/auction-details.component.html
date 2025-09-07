@@ -2,18 +2,21 @@
   <h1>Details for {{ auction.item.name }}'s auction</h1>
   <p><b>Item id:</b> {{ auction.item.itemid }}</p>
   <p><b>Item name:</b> {{ auction.item.name }}</p>
+
   <div class="item-categories">
     <h3>Categories:</h3>
     <div *ngFor="let category of auction.item.categories">
       <p><b>Category:</b> {{ category.name }}</p>
     </div>
   </div>
+
   <p><b>Currently:</b> {{ auction.currentBid }}</p>
   <p><b>First bid:</b> {{ auction.firstBid }}</p>
   <p><b>Number of Bids:</b> {{ auction.numberOfBids }}</p>
-  <div class="past-bids">
+
+  <div *ngIf="bids.length > 0; else noBids" class="past-bids">
     <h3>List of past bids:</h3>
-    <div *ngFor="let bid of auction.bids">
+    <div *ngFor="let bid of bids">
       <div class="bid">
         <div class="bidder">
           <p><b>Bidder rating:</b> {{ bid.bidder.rating }}</p>
@@ -25,11 +28,22 @@
         <p><b>Amount:</b> {{ bid.amount }}</p>
       </div>
     </div>
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="page === 0">Previous</button>
+      <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="page >= totalPages - 1">Next</button>
+    </div>
   </div>
+
+  <ng-template #noBids>
+    <p>No bids yet for this auction.</p>
+  </ng-template>
+
   <p><b>Location:</b> {{ auction.item.location }}</p>
   <p><b>Country:</b> {{ auction.item.country }}</p>
   <p><b>Start Time:</b> {{ auction.startTime }}</p>
   <p><b>End Time:</b> {{ auction.endTime }}</p>
   <p><b>Seller rating:</b> {{ auction.seller.sellerRating }}</p>
+  <p><b>Seller username:</b> {{ auction.seller.username }}</p>
   <p><b>Description:</b> {{ auction.item.description }}</p>
 </div>

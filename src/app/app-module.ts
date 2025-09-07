@@ -11,6 +11,8 @@ import { SellerComponent } from './seller/seller.component';
 import { AdminComponent } from './admin/admin.component';
 import { CreateAuctionComponent } from './create-auction/create-auction.component';
 import { AuctionDetailsComponent } from './auction-details/auction-details.component';
+import { PlaceBidComponent } from './place-bid/place-bid.component';
+import { ItemMapComponent } from './item-map/item-map.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +23,7 @@ import { UserService } from './services/user.service';
 import { AdminService } from './services/admin.service';
 import { AuctionService } from './services/auction.service';
 import { ItemService } from './services/item.service';
-import { PlaceBidComponent } from './place-bid/place-bid.component';
+import { EditAuctionComponent } from './edit-auction/edit-auction.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { PlaceBidComponent } from './place-bid/place-bid.component';
     AdminComponent,
     AuctionDetailsComponent,
     CreateAuctionComponent,
-    PlaceBidComponent
+    PlaceBidComponent,
+    ItemMapComponent,
+    EditAuctionComponent
   ],
   imports: [
     BrowserModule,

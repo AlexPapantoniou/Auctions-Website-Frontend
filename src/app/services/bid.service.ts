@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class BidService {
 
-  private apiUrl = 'http:localhost:8080/bids';
+  private apiUrl = 'http://localhost:8080/bids';
 
   constructor(private http: HttpClient) {}
 

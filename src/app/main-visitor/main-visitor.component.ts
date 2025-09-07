@@ -22,7 +22,6 @@ export class MainVisitorComponent {
     if (userid) {
       this.userService.getUserById(userid).subscribe(data => {
         this.user = data;
-        console.log(this.user.firstname);
       });
     }
   }

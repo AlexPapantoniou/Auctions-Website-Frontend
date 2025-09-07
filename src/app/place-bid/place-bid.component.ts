@@ -15,9 +15,9 @@ export class PlaceBidComponent {
   auction: any;
 
   bids: any[] = [];
-  bidPage = 0;
-  bidPageSize = 3;
-  totalBidPages = 0;
+  page = 0;
+  size = 3;
+  totalPages = 0;
 
   bid: any = {
     amount: 0,
@@ -49,22 +49,22 @@ export class PlaceBidComponent {
   }
 
   loadBids(): void {
-    this.bidService.getBidsByAuctionId(this.auction.auctionid, this.bidPage, this.bidPageSize).subscribe(data => {
+    this.bidService.getBidsByAuctionId(this.auction.auctionid, this.page, this.size).subscribe(data => {
       this.bids = data.content;
-      this.totalBidPages = data.totalPages;
+      this.totalPages = data.totalPages;
     });
   }
 
-  nextBidPage(): void {
-    if (this.bidPage < this.totalBidPages - 1) {
-      this.bidPage++;
+  nextPage(): void {
+    if (this.page < this.totalPages - 1) {
+      this.page++;
       this.loadBids();
     }
   }
 
-  prevBidPage(): void {
-    if (this.bidPage > 0) {
-      this.bidPage--;
+  prevPage(): void {
+    if (this.page > 0) {
+      this.page--;
       this.loadBids();
     }
   }

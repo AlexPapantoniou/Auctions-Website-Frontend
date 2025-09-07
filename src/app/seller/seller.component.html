@@ -12,15 +12,33 @@
             <option value="">All Categories</option>
             <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
         </select>
+
+        <select [(ngModel)]="selectedLocation" (change)="onLocationChange()">
+            <option value="">All Locations</option>
+            <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
+        </select>
+
+        <select [(ngModel)]="selectedCountry" (change)="onCountryChange()">
+            <option value="">All Countries</option>
+            <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+        </select>
+
+        <button (click)="myAuctions()">My auctions</button>
+        <button (click)="clearFilters()">Clear Filters</button>
     </div>
 
     <div *ngFor="let auction of auctions" class="auction-card">
         <h3>{{ auction.item.name }}</h3>
         <p>{{ auction.item.description }}</p>
         
-        <div class="details-button">
+        <div *ngIf="auction.seller.userid === user.userid; else justDetails" class="auction-actions">
             <button (click)="viewAuctionDetails(auction.auctionid)">Details</button>
+            <button (click)="editAuction(auction.auctionid)">Edit Auction</button>
         </div>
+
+        <ng-template #justDetails>
+            <button (click)="viewAuctionDetails(auction.auctionid)">Details</button>
+        </ng-template>>
     </div>
 
     <div class="pagination">

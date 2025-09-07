@@ -1,5 +1,5 @@
 <div class="auctions-container">
-    <h1>Welcome back {{ user.firstname }}!</h1>
+    <h1>Welcome back {{ user?.firstname }}!</h1>
     <h2>Here are the currently active auctions</h2>
 
     <div class="search-filter-container">
@@ -8,7 +8,7 @@
 
         <select [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
             <option value="">All Categories</option>
-            <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+            <option *ngFor="let category of categories" [value]="category.name">{{ category?.name }}</option>
         </select>
     </div>
 

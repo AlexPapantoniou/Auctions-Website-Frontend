@@ -1,10 +1,13 @@
 /* Container for navigation */
 .navigation {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  background-color: #007bff;
 }
 
 .navigation button {
-  background-color: #007bff;
+  background-color: rgb(6, 60, 238);
   color: white;
   border: none;
   padding: 8px 16px;
@@ -30,27 +33,27 @@
 }
 
 .auction-form button[type="submit"] {
-    display: block;
-    width: 200px;
-    margin: 20px auto; /* centers the button */
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+  display: block;
+  width: 200px;
+  margin: 20px auto; /* centers the button */
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .auction-form button[type="submit"]:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 .auction-form button[type="submit"]:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 /* Two-column grid layout */

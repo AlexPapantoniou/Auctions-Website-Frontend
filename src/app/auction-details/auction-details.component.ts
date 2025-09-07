@@ -1,6 +1,7 @@
 import { AuctionService } from './../services/auction.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BidService } from '../services/bid.service';
 
 @Component({
   selector: 'app-auction-details',
@@ -11,9 +12,15 @@ import { ActivatedRoute } from '@angular/router';
 export class AuctionDetailsComponent {
   auction: any;
 
+  bids: any[] = [];
+  page: number = 0;
+  size: number = 10;
+  totalPages: number = 0;
+
   constructor(
     private route: ActivatedRoute,
-    private auctionService: AuctionService
+    private auctionService: AuctionService,
+    private bidService: BidService
   ) {}
 
   ngOnInit(): void {
@@ -21,7 +28,30 @@ export class AuctionDetailsComponent {
     if (auctionid) {
       this.auctionService.getAuctionById(auctionid).subscribe(data => {
         this.auction = data;
+        this.loadBids();
       });
     }
   }
+
+  loadBids(): void {
+    this.bidService.getBidsByAuctionId(this.auction.auctionid, this.page, this.size).subscribe(data => {
+      this.bids = data.content;
+      this.totalPages = data.totalPages;
+    });
+  }
+
+  nextPage(): void {
+    if (this.page < this.totalPages - 1) {
+      this.page++;
+      this.loadBids();
+    }
+  }
+
+  prevPage(): void {
+    if (this.page > 0) {
+      this.page--;
+      this.loadBids();
+    }
+  }
+  
 }

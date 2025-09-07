@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { UserService } from '../services/user.service';
 import { AuctionService } from '../services/auction.service';
 import { CategoryService } from '../services/category.service';
@@ -49,7 +50,7 @@ export class BidderComponent {
   }
 
   loadCategories(): void {
-    this.categoryService.getCategories().subscribe(data => {
+    this.categoryService.getAllCategories().subscribe(data => {
       this.auctions = data;
     });
   }
@@ -83,6 +84,13 @@ export class BidderComponent {
   }
 
   placeBid(auctionid: number): void {
+    const auction = this.auctions.find(a => a.auctionid === auctionid);
+
+    if (auction && auction.sellerId === this.user.userid) {
+      alert("You cannot bid on your own auction.");
+      return;
+    }
+
     this.router.navigate(['app-place-bid', auctionid, this.user.userid]);
   }
 

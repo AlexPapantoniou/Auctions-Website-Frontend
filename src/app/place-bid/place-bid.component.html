@@ -7,18 +7,18 @@
       <p><b>Time:</b> {{ bid.time }}</p>
       <p><b>Bidder:</b> {{ bid.bidder.username }} (Rating: {{ bid.bidder.rating }})</p>
     </div>
-
+    
     <div class="pagination">
-      <button (click)="prevBidPage()" [disabled]="bidPage === 0">Previous</button>
-      <span>Page {{ bidPage + 1 }} of {{ totalBidPages }}</span>
-      <button (click)="nextBidPage()" [disabled]="bidPage >= totalBidPages - 1">Next</button>
+      <button (click)="prevPage()" [disabled]="page === 0">Previous</button>
+      <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="page >= totalPages - 1">Next</button>
     </div>
   </div>
 
   <ng-template #noBids>
     <p>No bids yet for this auction.</p>
   </ng-template>
-
+  
   <div class="new-bid">
     <form (ngSubmit)="submitBid()" #bidForm="ngForm">
       <label for="bidAmount">New Bid Amount:</label>
@@ -26,5 +26,5 @@
       <button type="submit" [disabled]="!bidForm.valid">Submit Bid</button>
     </form>
   </div>
-
+  
 </div>

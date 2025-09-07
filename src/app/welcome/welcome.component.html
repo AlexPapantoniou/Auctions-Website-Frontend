@@ -1,5 +1,5 @@
 <div class="welcome-container">
-  <form (ngSubmit)="onSubmit()" #welcomeForm="ngForm" class="welcome-form">
+  <form (ngSubmit)="onSubmit()" #signInForm="ngForm" class="welcome-form">
     <h2>Welcome</h2>
     <h3>Please Sign In</h3>
 
@@ -9,7 +9,7 @@
     <label for="password">Password</label>
     <input type="password" id="password" name="password" [(ngModel)]="password" required/>
 
-    <button type="submit">Sign In</button>
+    <button type="submit" [disabled]="!signInForm.valid">Sign In</button>
     <a routerLink="/app-signup">or create a new account.</a>
   </form>
 

@@ -1,0 +1,27 @@
+<div class="navigation">
+    <button (click)="backToSellerPage()">Return to main seller page</button>
+</div>
+
+<div class="edit-auction-container">
+    <h1>Edit the following details of your auction</h1>
+    <form>
+        <label for="buy-price">Buy Price:</label>
+        <textarea id="buy-price" name="buy-price" [(ngModel)]="auction.buyPrice"></textarea>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="auction.item.description"></textarea>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" [(ngModel)]="auction.item.location" />
+
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" [(ngModel)]="auction.item.country" />
+
+        <label for="endTime">End Time:</label>
+        <input type="datetime-local" id="endTime" name="endTime" [(ngModel)]="auction.endTime" />
+
+        <button type="button" (click)="saveChanges()">Save Changes</button>
+        <button type="button" (click)="deleteAuction()">Delete Auction</button>
+        <button type="button" (click)="cancelEdit()">Cancel</button>
+    </form>
+</div>

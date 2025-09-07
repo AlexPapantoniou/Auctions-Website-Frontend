@@ -44,6 +44,6 @@
             </div>
         </div>
 
-        <button type="submit">Add auction</button>
+        <button type="submit" [disabled]="!auctionForm.valid">Add auction</button>
     </form>
 </div>

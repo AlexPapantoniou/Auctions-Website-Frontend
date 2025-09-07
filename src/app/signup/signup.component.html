@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <button type="submit">Sign Up</button>
+    <button type="submit" [disabled]="!signupForm.valid">Sign Up</button>
   </form>
 
   <p *ngIf="message">{{message}}</p>

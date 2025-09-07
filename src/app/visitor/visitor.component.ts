@@ -49,7 +49,7 @@ export class VisitorComponent {
   }
 
   loadCategories(): void {
-    this.categoryService.getCategories().subscribe(data => {
+    this.categoryService.getAllCategories().subscribe(data => {
       this.categories = data;
     });
   }

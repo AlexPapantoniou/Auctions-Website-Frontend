@@ -12,6 +12,8 @@ import { AdminComponent } from './admin/admin.component';
 import { CreateAuctionComponent } from './create-auction/create-auction.component';
 import { AuctionDetailsComponent } from './auction-details/auction-details.component';
 import { PlaceBidComponent } from './place-bid/place-bid.component';
+import { ItemMapComponent } from './item-map/item-map.component';
+import { EditAuctionComponent } from './edit-auction/edit-auction.component';
 
 export const routes: Routes = [ 
   {
@@ -62,6 +64,14 @@ export const routes: Routes = [
   {
     path: 'app-place-bid/:auctionid/:userid',
     component: PlaceBidComponent
+  },
+  {
+    path: 'app-item-map',
+    component: ItemMapComponent
+  },
+  {
+    path: 'app-edit-auction/:id',
+    component: EditAuctionComponent
   }
 ]; 
 
