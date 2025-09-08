@@ -66,7 +66,7 @@ export const routes: Routes = [
     component: PlaceBidComponent
   },
   {
-    path: 'app-item-map',
+    path: 'app-item-map/:location',
     component: ItemMapComponent
   },
   {

@@ -1,6 +1,6 @@
 import { AuctionService } from './../services/auction.service';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BidService } from '../services/bid.service';
 
 @Component({
@@ -19,6 +19,7 @@ export class AuctionDetailsComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private auctionService: AuctionService,
     private bidService: BidService
   ) {}
@@ -52,6 +53,11 @@ export class AuctionDetailsComponent {
       this.page--;
       this.loadBids();
     }
+  }
+
+  viewMap(): void {
+    const location = this.auction.item.location + ', ' + this.auction.item.country;
+    this.router.navigate(['/app-item-map', location]);
   }
   
 }

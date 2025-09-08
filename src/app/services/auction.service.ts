@@ -36,12 +36,20 @@ export class AuctionService {
     return this.http.get<string[]>(`${this.apiUrl}/locations`);
   }
 
+  getAllCities(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/cities`);
+  }
+
   getAllCountries(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/countries`);
   }
 
   getItemsByLocation(location: string, page: number, size: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/items/location/${location}?page=${page}&size=${size}`);
+  }
+
+  getItemsByCity(city: string, page: number, size: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/items/city/${city}?page=${page}&size=${size}`);
   }
 
   getItemsByCountry(country: string, page: number, size: number): Observable<any> {

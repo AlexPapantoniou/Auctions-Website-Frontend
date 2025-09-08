@@ -15,8 +15,14 @@
                 <label for="item-firstbid">Item first bid</label>
                 <input type="number" id="item-firstbid" name="item-firstbid" [(ngModel)]="auction.firstBid" required />
                 
+                <label for="item-address">Item address</label>
+                <input type="text" id="item-address" name="item-address" [(ngModel)]="auction.item.address" required />
+
                 <label for="item-location">Item location</label>
-                <input type="text" id="item-location" name="item-loction" [(ngModel)]="auction.item.location" required />
+                <input type="text" id="item-location" name="item-location" [(ngModel)]="auction.item.location" required />
+
+                <label for="item-city">Item city</label>
+                <input type="text" id="item-city" name="item-city" [(ngModel)]="auction.item.city" required />
                 
                 <label for="item-country">Item country</label>
                 <input type="text" id="item-country" name="item-country" [(ngModel)]="auction.item.country" required />

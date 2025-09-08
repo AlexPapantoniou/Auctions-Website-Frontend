@@ -14,9 +14,15 @@ export class SignupComponent {
   user: User = { username: '', password: '', firstname: '', lastname: '', city: '', country: '', email: '', phonenumber: '', afm: '', accepted: false };
   message: string = '';
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   onSubmit(): void {
+    if (this.user.password !== (document.getElementById('confirmpassword') as HTMLInputElement).value) {
+      alert('Passwords do not match');
+    }
     this.userService.signup(this.user).subscribe({
       next: (savedUser) => {
         this.user = { username: '', password: '', firstname: '', lastname: '', city: '', country: '', email: '', phonenumber: '', afm: '', accepted: false };
@@ -24,7 +30,6 @@ export class SignupComponent {
       },
       error: (err) => {
         console.error(err);
-        this.message = `Error registering user: ${err.message}`;
       }
     });
   }

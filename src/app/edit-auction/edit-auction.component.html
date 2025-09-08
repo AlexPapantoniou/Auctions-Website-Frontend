@@ -11,8 +11,14 @@
         <label for="description">Description:</label>
         <textarea id="description" name="description" [(ngModel)]="auction.item.description"></textarea>
 
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" [(ngModel)]="auction.item.address" />
+
         <label for="location">Location:</label>
         <input type="text" id="location" name="location" [(ngModel)]="auction.item.location" />
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" [(ngModel)]="auction.item.city" />
 
         <label for="country">Country:</label>
         <input type="text" id="country" name="country" [(ngModel)]="auction.item.country" />

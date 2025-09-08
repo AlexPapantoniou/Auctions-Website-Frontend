@@ -39,11 +39,14 @@
     <p>No bids yet for this auction.</p>
   </ng-template>
 
-  <p><b>Location:</b> {{ auction.item.location }}</p>
+  <p><b>Location:</b> {{ auction.item.adderss }}</p>
+  <p><b>City:</b> {{ auction.item.city }}</p>
   <p><b>Country:</b> {{ auction.item.country }}</p>
   <p><b>Start Time:</b> {{ auction.startTime }}</p>
   <p><b>End Time:</b> {{ auction.endTime }}</p>
   <p><b>Seller rating:</b> {{ auction.seller.sellerRating }}</p>
   <p><b>Seller username:</b> {{ auction.seller.username }}</p>
   <p><b>Description:</b> {{ auction.item.description }}</p>
+
+  <button (click)="viewMap()">View location on map</button>
 </div>

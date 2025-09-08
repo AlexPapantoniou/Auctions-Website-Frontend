@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
 
 @Component({
@@ -7,20 +8,39 @@ import * as L from 'leaflet';
   templateUrl: './item-map.component.html',
   styleUrl: './item-map.component.css'
 })
-export class ItemMapComponent {
-  private map: any;
+export class ItemMapComponent implements AfterViewInit {
+  location: string = '';
 
-  contructor() {};
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(): void {
-    this.configMap();
+  ngAfterViewInit(): void {
+      this.route.paramMap.subscribe(params => {
+        this.location = params.get('location') || '';
+
+        if (this.location) {
+          this.loadMap(this.location);
+        }
+      });
   }
 
-  configMap(): void {
-    this.map = L.map('map').setView([51.505, -0.09], 13);
+  private async loadMap(location: string) {
+    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location.toString())}`);
+    const data = await response.json();
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.map);
+    if (data && data.length > 0) {
+      const lat = parseFloat(data[0].lat);
+      const lon = parseFloat(data[0].lon);
+
+      const map = L.map('map').setView([lat, lon], 13);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+      }).addTo(map);
+
+      L.marker([lat, lon]).addTo(map)
+        .bindPopup(`<b>${location}</b>`)
+        .openPopup();
+    }
   }
 }

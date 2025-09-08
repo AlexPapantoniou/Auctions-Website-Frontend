@@ -1,3 +1,4 @@
+import { PlaceBidComponent } from './../place-bid/place-bid.component';
 import { UserService } from './../services/user.service';
 import { Component } from '@angular/core';
 import { AuctionService } from '../services/auction.service';
@@ -21,6 +22,8 @@ export class VisitorComponent {
   
   categories: any[] = [];
   selectedCategory = '';
+  cities: string[] = [];
+  selectedCity = '';
   locations: string[] = [];
   selectedLocation = '';
   countries: string[] = [];
@@ -43,6 +46,9 @@ export class VisitorComponent {
     }
     this.loadAuctions();
     this.loadCategories();
+    this.loadLocations();
+    this.loadCities();
+    this.loadCountries();
   }
 
   loadAuctions(): void {
@@ -64,10 +70,20 @@ export class VisitorComponent {
     });
   }
 
+  loadCities(): void {
+    this.auctionService.getAllCities().subscribe(data => {
+      this.cities = data;
+    });
+  }
+
   loadCountries(): void {
     this.auctionService.getAllCountries().subscribe(data => {
       this.countries = data;
     });
+  }
+
+  roleSelector(): void {
+    this.router.navigate(['app-main-visitor', this.user.userid]);
   }
 
   search(): void {
@@ -97,6 +113,18 @@ export class VisitorComponent {
   onLocationChange(): void {
     if (this.selectedLocation) {
       this.auctionService.getItemsByLocation(this.selectedLocation, this.page, this.size).subscribe(data => {
+        this.auctions = data.content;
+        this.totalPages = data.totalPages;
+      });
+    }
+    else {
+      this.loadAuctions();
+    }
+  }
+
+  onCityChange(): void {
+    if (this.selectedCity) {
+      this.auctionService.getItemsByCity(this.selectedCity, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
       });
