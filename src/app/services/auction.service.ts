@@ -8,7 +8,7 @@ import { Auction } from '../model/auction.model';
   providedIn: 'root'
 })
 export class AuctionService {
-  private apiUrl = 'http://localhost:8080/auctions';
+  private apiUrl = '/auctions/auctions';
 
   constructor(private http: HttpClient) {};
 

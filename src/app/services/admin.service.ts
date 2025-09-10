@@ -8,7 +8,7 @@ import { User } from '../model/user.model';
   providedIn: 'root'
 })
 export class AdminService {
-  private baseUrl = 'http://localhost:8080/auctions/admin';
+  private baseUrl = '/auctions/admin';
 
   constructor(private http: HttpClient) {}
 

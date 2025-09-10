@@ -1,5 +1,5 @@
 <div *ngIf="auction">
-  <h1>Details for {{ auction.item.name }}'s auction</h1>
+  <h1>Details of {{ auction.item.name }}'s auction</h1>
   <p><b>Item id:</b> {{ auction.item.itemid }}</p>
   <p><b>Item name:</b> {{ auction.item.name }}</p>
 
@@ -47,6 +47,7 @@
   <p><b>Seller rating:</b> {{ auction.seller.sellerRating }}</p>
   <p><b>Seller username:</b> {{ auction.seller.username }}</p>
   <p><b>Description:</b> {{ auction.item.description }}</p>
-
-  <button (click)="viewMap()">View location on map</button>
+  <div class="map-view">
+    <p><b>Location on map:</b></p> <button (click)="viewMap()">View location on map</button>
+  </div>
 </div>

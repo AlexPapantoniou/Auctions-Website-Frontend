@@ -8,7 +8,7 @@ import { User } from '../model/user.model'
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8080/auctions';
+  private apiUrl = '/auctions/users';
 
   constructor(private http: HttpClient) {}
 
@@ -17,11 +17,11 @@ export class UserService {
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/users`);
+    return this.http.get<User[]>(`${this.apiUrl}`);
   }
 
   getUserById(userid: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/users/${userid}`);
+    return this.http.get<User>(`${this.apiUrl}/${userid}`);
   }
 
   login(username: string, password: string): Observable<User> {
