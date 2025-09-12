@@ -87,6 +87,15 @@
   border-radius: 6px;
 }
 
+.filters-row button {
+  background-color: #17a2b8; /* My Auctions button */
+  color: white;
+}
+
+.filters-row button:hover {
+  background-color: #11707f;
+}
+
 /* Row 3: Clear filters + My Auctions */
 .clear-row {
   display: flex;
@@ -98,15 +107,6 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-}
-
-.clear-row button:first-child {
-  background-color: #17a2b8; /* My Auctions button */
-  color: white;
-}
-
-.clear-row button:first-child:hover {
-  background-color: #11707f;
 }
 
 .clear-row .clear-filters {

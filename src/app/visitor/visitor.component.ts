@@ -112,7 +112,7 @@ export class VisitorComponent {
 
   onLocationChange(): void {
     if (this.selectedLocation) {
-      this.auctionService.getItemsByLocation(this.selectedLocation, this.page, this.size).subscribe(data => {
+      this.auctionService.getAuctionsByLocation(this.selectedLocation, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
       });
@@ -124,7 +124,7 @@ export class VisitorComponent {
 
   onCityChange(): void {
     if (this.selectedCity) {
-      this.auctionService.getItemsByCity(this.selectedCity, this.page, this.size).subscribe(data => {
+      this.auctionService.getAuctionsByCity(this.selectedCity, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
       });
@@ -136,7 +136,7 @@ export class VisitorComponent {
 
   onCountryChange(): void {
     if (this.selectedCountry) {
-      this.auctionService.getItemsByCountry(this.selectedCountry, this.page, this.size).subscribe(data => {
+      this.auctionService.getAuctionsByCountry(this.selectedCountry, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
       });

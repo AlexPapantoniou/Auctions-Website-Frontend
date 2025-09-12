@@ -22,6 +22,7 @@ export class SignupComponent {
   onSubmit(): void {
     if (this.user.password !== (document.getElementById('confirmpassword') as HTMLInputElement).value) {
       alert('Passwords do not match');
+      return;
     }
     this.userService.signup(this.user).subscribe({
       next: (savedUser) => {

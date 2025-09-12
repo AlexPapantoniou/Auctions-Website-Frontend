@@ -1,9 +1,11 @@
 <div class="navigation">
     <button (click)="backToSellerPage()">Return to main seller page</button>
+    <button (click)="reauctionMyItems()">Choose one of your past items to reauction</button>
 </div>
 <div class="auction-creation-container">
     <form (ngSubmit)="onSubmit()" #auctionForm="ngForm" class="auction-form">
         <h1>Please fill out the fields below to submit your item for auction</h1>
+        
         <div class="form-grid">
             <div class="general-info">
                 <label for="item-name">Item name</label>
@@ -16,22 +18,27 @@
                 <input type="number" id="item-firstbid" name="item-firstbid" [(ngModel)]="auction.firstBid" required />
                 
                 <label for="item-address">Item address</label>
-                <input type="text" id="item-address" name="item-address" [(ngModel)]="auction.item.address" required />
+                <input type="text" id="item-address" name="item-address" [(ngModel)]="auction.address" required />
 
                 <label for="item-location">Item location</label>
-                <input type="text" id="item-location" name="item-location" [(ngModel)]="auction.item.location" required />
+                <input type="text" id="item-location" name="item-location" [(ngModel)]="auction.location" required />
 
                 <label for="item-city">Item city</label>
-                <input type="text" id="item-city" name="item-city" [(ngModel)]="auction.item.city" required />
+                <input type="text" id="item-city" name="item-city" [(ngModel)]="auction.city" required />
                 
                 <label for="item-country">Item country</label>
-                <input type="text" id="item-country" name="item-country" [(ngModel)]="auction.item.country" required />
+                <input type="text" id="item-country" name="item-country" [(ngModel)]="auction.country" required />
                 
                 <label for="item-description">Item description</label>
                 <input type="text" id="item-description" name="item-description" [(ngModel)]="auction.item.description" required />
 
+                <label for="auction-starttime">Start time</label>
+                <input type="datetime-local" id="auction-starttime" name="auction-starttime" 
+                    [ngModel]="formatDateForInput(auction.startTime)" (ngModelChange)="auction.startTime = $event" required />
+
                 <label for="auction-endtime">End time</label>
-                <input type="datetime-local" id="auction-endtime" name="auction-endtime" [(ngModel)]="auction.endTime" required />
+                <input type="datetime-local" id="auction-endtime" name="auction-endtime" 
+                    [ngModel]="formatDateForInput(auction.endTime)" (ngModelChange)="auction.endTime = $event" required />
             </div>
 
             <div class="categories">

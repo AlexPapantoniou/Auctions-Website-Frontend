@@ -14,6 +14,7 @@ import { AuctionDetailsComponent } from './auction-details/auction-details.compo
 import { PlaceBidComponent } from './place-bid/place-bid.component';
 import { ItemMapComponent } from './item-map/item-map.component';
 import { EditAuctionComponent } from './edit-auction/edit-auction.component';
+import { ReauctionComponent } from './reauction/reauction.component';
 
 export const routes: Routes = [ 
   {
@@ -72,6 +73,10 @@ export const routes: Routes = [
   {
     path: 'app-edit-auction/:id',
     component: EditAuctionComponent
+  },
+  {
+    path: 'app-reauction/:id',
+    component: ReauctionComponent
   }
 ]; 
 

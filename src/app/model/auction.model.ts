@@ -10,4 +10,8 @@ export interface Auction {
     numberOfBids: number;
     startTime: string;
     endTime: string;
+    adderss: string;
+    location: string;
+    city: string;
+    country: string;
 }

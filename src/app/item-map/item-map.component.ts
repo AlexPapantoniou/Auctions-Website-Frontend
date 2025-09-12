@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
 
@@ -24,6 +24,7 @@ export class ItemMapComponent implements AfterViewInit {
   }
 
   private async loadMap(location: string) {
+    console.log('Query location:', location);
     const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location.toString())}`);
     const data = await response.json();
 

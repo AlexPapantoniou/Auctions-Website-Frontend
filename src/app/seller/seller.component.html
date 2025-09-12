@@ -39,20 +39,21 @@
             <option value="">All Countries</option>
             <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
             </select>
+
+            <button (click)="myAuctions()">My auctions</button>
         </div>
 
         <!-- Row 3: Clear filters -->
         <div class="clear-row">
-            <button (click)="myAuctions()">My auctions</button>
             <button class="clear-filters" (click)="clearFilters()">Clear Filters</button>
         </div>
     </div>
 
     <div *ngFor="let auction of auctions" class="auction-card">
-        <h3>{{ auction.item.name }}</h3>
-        <p>{{ auction.item.description }}</p>
+        <h3>{{ auction.item?.name }}</h3>
+        <p>{{ auction.item?.description }}</p>
         
-        <div *ngIf="auction.seller.userid === user.userid; else justDetails" class="auction-actions">
+        <div *ngIf="auction.seller?.userid === user?.userid; else justDetails" class="auction-actions">
             <button (click)="viewAuctionDetails(auction.auctionid)">Details</button>
             <button (click)="editAuction(auction.auctionid)">Edit Auction</button>
         </div>

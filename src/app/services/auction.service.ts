@@ -8,7 +8,7 @@ import { Auction } from '../model/auction.model';
   providedIn: 'root'
 })
 export class AuctionService {
-  private apiUrl = '/auctions/auctions';
+  private apiUrl = '/auctions';
 
   constructor(private http: HttpClient) {};
 
@@ -44,16 +44,16 @@ export class AuctionService {
     return this.http.get<string[]>(`${this.apiUrl}/countries`);
   }
 
-  getItemsByLocation(location: string, page: number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/items/location/${location}?page=${page}&size=${size}`);
+  getAuctionsByLocation(location: string, page: number, size: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/location/${encodeURIComponent(location)}?page=${page}&size=${size}`);
   }
 
-  getItemsByCity(city: string, page: number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/items/city/${city}?page=${page}&size=${size}`);
+  getAuctionsByCity(city: string, page: number, size: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/city/${encodeURIComponent(city)}?page=${page}&size=${size}`);
   }
 
-  getItemsByCountry(country: string, page: number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/items/country/${country}?page=${page}&size=${size}`);
+  getAuctionsByCountry(country: string, page: number, size: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/country/${encodeURIComponent(country)}?page=${page}&size=${size}`);
   }
 
   addAuction(auction: Auction): Observable<Auction> {

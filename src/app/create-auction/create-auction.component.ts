@@ -43,9 +43,20 @@ export class CreateAuctionComponent {
   }
 
   backToSellerPage() {
-    this.router.navigate(['/app-seller', this.user.userid]);
+    this.router.navigate(['app-seller', this.user.userid]);
   }
 
+  reauctionMyItems() {
+    this.router.navigate(['app-reauction', this.user.userid]);
+  }
+
+  formatDateForInput(dateString: string | Date): string {
+    if (!dateString) {
+      return '';
+    }
+    const date = new Date(dateString);
+    return date.toISOString().slice(0, 16);
+  }
   
   addCategory() {
     this.categories.push('');

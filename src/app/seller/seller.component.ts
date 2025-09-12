@@ -43,12 +43,12 @@ export class SellerComponent {
       this.userService.getUserById(userid).subscribe(data => {
         this.user = data;
       });
+      this.loadAuctions();
+      this.loadCategories();
+      this.loadLocations();
+      this.loadCities();
+      this.loadCountries();
     }
-    this.loadAuctions();
-    this.loadCategories();
-    this.loadLocations();
-    this.loadCities();
-    this.loadCountries();
   }
 
   loadAuctions(): void {
@@ -112,7 +112,7 @@ export class SellerComponent {
 
   onLocationChange(): void {
     if (this.selectedLocation) {
-      this.auctionService.getItemsByLocation(this.selectedLocation, this.page, this.size).subscribe(data => {
+      this.auctionService.getAuctionsByLocation(this.selectedLocation, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
       });
@@ -124,7 +124,7 @@ export class SellerComponent {
 
   onCityChange(): void {
     if (this.selectedCity) {
-      this.auctionService.getItemsByCity(this.selectedCity, this.page, this.size).subscribe(data => {
+      this.auctionService.getAuctionsByCity(this.selectedCity, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
       });
@@ -136,7 +136,7 @@ export class SellerComponent {
 
   onCountryChange(): void {
     if (this.selectedCountry) {
-      this.auctionService.getItemsByCountry(this.selectedCountry, this.page, this.size).subscribe(data => {
+      this.auctionService.getAuctionsByCountry(this.selectedCountry, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
       });
@@ -171,6 +171,12 @@ export class SellerComponent {
   }
 
   editAuction(auctionid: number): void {
+    const auction = this.auctions.find(a => a.auctionid === auctionid);
+    const currentDate: Date = new Date();
+    if ((new Date(auction.startDate) <= currentDate) && auction.numberOfBids > 0) {
+      alert('You cannot edit an auction that has already started and has bids.');
+      return;
+    }
     this.router.navigate(['app-edit-auction', auctionid]);
   }
 

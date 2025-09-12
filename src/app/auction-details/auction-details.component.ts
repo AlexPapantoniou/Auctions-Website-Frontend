@@ -56,7 +56,7 @@ export class AuctionDetailsComponent {
   }
 
   viewMap(): void {
-    const location = this.auction.item.address + ', ' + this.auction.item.location + ', ' + this.auction.item.city + ', ' + this.auction.item.country;
+    const location = this.auction.address + ', ' + this.auction.location + ', ' + this.auction.city + ', ' + this.auction.country;
     this.router.navigate(['/app-item-map', location]);
   }
   

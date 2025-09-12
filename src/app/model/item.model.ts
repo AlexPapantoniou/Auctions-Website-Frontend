@@ -5,9 +5,5 @@ export interface Item {
     auction: Auction;
     name: string;
     categories: string[];
-    adderss: string;
-    location: string;
-    city: string;
-    country: string;
     description: string;
 }

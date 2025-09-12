@@ -55,16 +55,16 @@ export class PlaceBidComponent {
     });
   }
 
-  nextPage(): void {
-    if (this.page < this.totalPages - 1) {
-      this.page++;
+  prevPage(): void {
+    if (this.page > 0) {
+      this.page--;
       this.loadBids();
     }
   }
 
-  prevPage(): void {
-    if (this.page > 0) {
-      this.page--;
+  nextPage(): void {
+    if (this.page < this.totalPages - 1) {
+      this.page++;
       this.loadBids();
     }
   }

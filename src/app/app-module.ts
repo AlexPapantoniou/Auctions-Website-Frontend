@@ -23,6 +23,8 @@ import { UserService } from './services/user.service';
 import { AdminService } from './services/admin.service';
 import { AuctionService } from './services/auction.service';
 import { EditAuctionComponent } from './edit-auction/edit-auction.component';
+import { ReauctionComponent } from './reauction/reauction.component';
+import { ItemService } from './services/item.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { EditAuctionComponent } from './edit-auction/edit-auction.component';
     CreateAuctionComponent,
     PlaceBidComponent,
     ItemMapComponent,
-    EditAuctionComponent
+    EditAuctionComponent,
+    ReauctionComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { EditAuctionComponent } from './edit-auction/edit-auction.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService, AdminService, AuctionService],
+  providers: [UserService, AdminService, AuctionService, ItemService],
   bootstrap: [AppComponent]
 })
 
