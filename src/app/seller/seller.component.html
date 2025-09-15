@@ -55,7 +55,9 @@
         
         <div *ngIf="auction.seller?.userid === user?.userid; else justDetails" class="auction-actions">
             <button (click)="viewAuctionDetails(auction.auctionid)">Details</button>
-            <button (click)="editAuction(auction.auctionid)">Edit Auction</button>
+            <button (click)="editAuction(auction.auctionid)" [disabled]="!auction.active">
+                {{ auction.active ? 'Edit Auction' : 'Auction already ended' }}
+            </button>
         </div>
 
         <ng-template #justDetails>

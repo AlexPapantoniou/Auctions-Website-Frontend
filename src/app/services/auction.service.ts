@@ -60,6 +60,10 @@ export class AuctionService {
     return this.http.post<Auction>(`${this.apiUrl}/addauction`, auction);
   }
 
+  buyNow(auctionid: number, bidderid: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${auctionid}/buy/${bidderid}`, {});
+  }
+
   updateAuction(auctionid: number, auction: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/update/${auctionid}`, auction);
   }

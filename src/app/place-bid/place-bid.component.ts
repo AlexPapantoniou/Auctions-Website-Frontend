@@ -29,6 +29,7 @@ export class PlaceBidComponent {
 
   constructor (
     private route: ActivatedRoute,
+    private router: Router,
     private userService: UserService,
     private auctionService: AuctionService,
     private bidService: BidService
@@ -53,6 +54,10 @@ export class PlaceBidComponent {
       this.bids = data.content;
       this.totalPages = data.totalPages;
     });
+  }
+
+  backToBidderPage(): void {
+    this.router.navigate(['app-bidder', this.user.userid]);
   }
 
   prevPage(): void {
@@ -84,6 +89,19 @@ export class PlaceBidComponent {
       error: (err) => {
         console.error('Error placing bid:', err);
         alert('Failed to place bid: ' + err.error?.message);
+      }
+    });
+  }
+
+  buyNow(): void {
+    this.auctionService.buyNow(this.auction.auctionid, this.user.userid).subscribe({
+      next: (response) => {
+        alert('You have successfully bought the item!');
+        this.router.navigate(['app-bidder', this.user.userid]);
+      },
+      error: (err) => {
+        console.log('Error buying item: ' + err);
+        alert('Error buying item');
       }
     });
   }

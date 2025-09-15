@@ -172,11 +172,15 @@ export class SellerComponent {
 
   editAuction(auctionid: number): void {
     const auction = this.auctions.find(a => a.auctionid === auctionid);
+
     const currentDate: Date = new Date();
-    if ((new Date(auction.startDate) <= currentDate) && auction.numberOfBids > 0) {
+    const startDate = new Date(auction.startTime);
+
+    if ((startDate.getTime() <= currentDate.getTime()) && (auction.numberOfBids > 0)) {
       alert('You cannot edit an auction that has already started and has bids.');
       return;
     }
+
     this.router.navigate(['app-edit-auction', auctionid]);
   }
 

@@ -8,10 +8,11 @@ export interface Auction {
     currentBid: number;
     buyPrice: number;
     numberOfBids: number;
-    startTime: string;
-    endTime: string;
-    adderss: string;
+    startTime: Date;
+    endTime: Date;
+    address: string;
     location: string;
     city: string;
     country: string;
+    active: boolean;
 }

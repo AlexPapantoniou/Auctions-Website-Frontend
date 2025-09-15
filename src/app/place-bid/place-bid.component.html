@@ -1,3 +1,6 @@
+<div class="navigation">
+  <button (click)="backToBidderPage()">Back to bidder page</button>
+</div>
 <div *ngIf="auction">
   <h1>{{ auction.item.name }} - List of past bids</h1>
 
@@ -26,5 +29,7 @@
       <button type="submit" [disabled]="!bidForm.valid">Submit Bid</button>
     </form>
   </div>
+
+  <button (click)="buyNow()" [disabled]="!auction.active">Buy Now</button>
   
 </div>
