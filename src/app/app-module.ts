@@ -25,6 +25,8 @@ import { AuctionService } from './services/auction.service';
 import { EditAuctionComponent } from './edit-auction/edit-auction.component';
 import { ReauctionComponent } from './reauction/reauction.component';
 import { ItemService } from './services/item.service';
+import { MessageComponent } from './message/message.component';
+import { MessageService } from './services/message.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { ItemService } from './services/item.service';
     PlaceBidComponent,
     ItemMapComponent,
     EditAuctionComponent,
-    ReauctionComponent
+    ReauctionComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,7 @@ import { ItemService } from './services/item.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService, AdminService, AuctionService, ItemService],
+  providers: [UserService, AdminService, AuctionService, ItemService, MessageService],
   bootstrap: [AppComponent]
 })
 

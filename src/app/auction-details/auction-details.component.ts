@@ -2,6 +2,7 @@ import { AuctionService } from './../services/auction.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BidService } from '../services/bid.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-auction-details',
@@ -11,6 +12,7 @@ import { BidService } from '../services/bid.service';
 })
 export class AuctionDetailsComponent {
   auction: any;
+  user: any;
 
   bids: any[] = [];
   page: number = 0;
@@ -21,15 +23,22 @@ export class AuctionDetailsComponent {
     private route: ActivatedRoute,
     private router: Router,
     private auctionService: AuctionService,
+    private userService: UserService,
     private bidService: BidService
   ) {}
 
   ngOnInit(): void {
-    const auctionid = Number(this.route.snapshot.params['id']);
+    const auctionid = Number(this.route.snapshot.params['auctionid']);
     if (auctionid) {
       this.auctionService.getAuctionById(auctionid).subscribe(data => {
         this.auction = data;
         this.loadBids();
+      });
+    }
+    const userid = Number(this.route.snapshot.params['userid']);
+    if (userid) {
+      this.userService.getUserById(userid).subscribe(data => {
+        this.user = data;
       });
     }
   }

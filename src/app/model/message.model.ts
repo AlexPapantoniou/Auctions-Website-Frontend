@@ -1,9 +1,12 @@
-export interface message {
+import { Auction } from "./auction.model";
+import { User } from "./user.model";
+
+export interface Message {
     messageid?: number;
-    senderid: number;
-    receiverid: number;
-    auctionid?: number;
+    sender: User;
+    receiver: User;
+    auction: Auction;
     content: string;
-    timestamp?: Date;
+    timestamp?: string;
     read?: boolean;
 }

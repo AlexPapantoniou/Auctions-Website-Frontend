@@ -1,1 +1,18 @@
-<p>message works!</p>
+<div class="chat-container">
+    <h2>Auction Chat</h2>
+
+    <div class="messages">
+        <div *ngFor="let message of messages"
+            [class.own-message]="message.sender.userid === user.userid"
+            class="message">
+
+            <strong>{{ message.sender.firstname }}:</strong> {{ message.content }}
+            <small>{{ message.timestamp | date: 'short' }}</small>
+        </div>
+    </div>
+
+    <div class="send-box">
+        <input type="text" [(ngModel)]="newMessageContent" placeholder="Type message..." />
+        <button (click)="sendMessage()">Send</button>
+    </div>
+</div>

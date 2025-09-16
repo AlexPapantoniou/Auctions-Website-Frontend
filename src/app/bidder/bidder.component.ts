@@ -147,7 +147,7 @@ export class BidderComponent {
   }
 
   viewAuctionDetails(auctionid: number): void {
-    this.router.navigate(['/app-auction-details', auctionid]);
+    this.router.navigate(['/app-auction-details', this.user.userid, auctionid]);
   }
   
   placeBid(auctionid: number): void {

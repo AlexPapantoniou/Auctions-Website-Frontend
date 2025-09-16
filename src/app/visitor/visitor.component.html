@@ -53,6 +53,12 @@
 
         <div class="details-button">
             <button (click)="viewAuctionDetails(auction.auctionid)">Details</button>
+
+            <button
+                *ngIf="user && auction.winner?.userid === user.userid"
+                (click)="goToChat(auction.auctionid)">
+                Chat with seller
+            </button>
         </div>
     </div>
 
