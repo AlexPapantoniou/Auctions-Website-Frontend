@@ -1,15 +1,16 @@
 import { Item } from "./item.model";
+import { User } from "./user.model";
 
 export interface Auction {
     auctionid: number;
     item: Item;
-    sellerId?: number;
+    seller: User;
     firstBid: number;
     currentBid: number;
     buyPrice: number;
     numberOfBids: number;
-    startTime: Date;
-    endTime: Date;
+    startTime: string;
+    endTime: string;
     address: string;
     location: string;
     city: string;

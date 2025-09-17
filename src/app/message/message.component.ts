@@ -56,7 +56,7 @@ export class MessageComponent {
     const message: Message = {
       messageid: 0,
       sender: this.user,
-      receiver: {} as User,
+      receiver: this.auction.seller,
       auction: this.auction,
       content: this.newMessageContent,
       timestamp: new Date().toString(),

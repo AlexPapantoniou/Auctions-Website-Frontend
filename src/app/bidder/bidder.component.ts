@@ -157,6 +157,11 @@ export class BidderComponent {
       alert("You cannot bid on your own auction.");
       return;
     }
+
+    if (auction && !auction.active) {
+      alert("This auction has already ended.");
+      return;
+    }
     
     this.router.navigate(['app-place-bid', auctionid, this.user.userid]);
   }

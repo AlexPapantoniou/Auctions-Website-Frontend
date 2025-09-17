@@ -13,8 +13,7 @@
             <input
             type="text"
             [(ngModel)]="keyword"
-            placeholder="Search auctions by name, category or description..."
-            />
+            placeholder="Search auctions by name, category or description..." />
             <button (click)="search()">Search</button>
         </div>
 
@@ -50,7 +49,7 @@
     </div>
 
     <div *ngFor="let auction of auctions" class="auction-card">
-        <h3>{{ auction.item?.name }}</h3>
+        <h3>{{ auction.item?.name }} {{ auction.active ? '(active)' : '(inactive)' }}</h3>
         <p>{{ auction.item?.description }}</p>
         
         <div *ngIf="auction.seller?.userid === user?.userid; else justDetails" class="auction-actions">

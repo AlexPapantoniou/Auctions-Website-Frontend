@@ -21,7 +21,7 @@
         <div class="bidder">
           <p><b>Bidder rating:</b> {{ bid.bidder.bidderRating }}</p>
           <p><b>Bidder username:</b> {{ bid.bidder.username }}</p>
-          <p><b>Bidder location:</b> {{ bid.bidder.city }}</p>
+          <p><b>Bidder city:</b> {{ bid.bidder.city }}</p>
           <p><b>Bidder country:</b> {{ bid.bidder.country }}</p>
         </div>
         <p><b>Time:</b> {{ bid.time }}</p>
@@ -43,8 +43,8 @@
   <p><b>Location:</b> {{ auction.location }}</p>
   <p><b>City:</b> {{ auction.city }}</p>
   <p><b>Country:</b> {{ auction.country }}</p>
-  <p><b>Start Time:</b> {{ auction.startTime }}</p>
-  <p><b>End Time:</b> {{ auction.endTime }}</p>
+  <p><b>Start Time:</b> {{ auction.startTime | date:'medium' }}</p>
+  <p><b>End Time:</b> {{ auction.endTime | date:'medium' }}</p>
   <p><b>Seller rating:</b> {{ auction.seller.sellerRating }}</p>
   <p><b>Seller username:</b> {{ auction.seller.username }}</p>
   <p><b>Description:</b> {{ auction.item.description }}</p>

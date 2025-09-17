@@ -71,8 +71,13 @@ export class CreateAuctionComponent {
   }
 
   onSubmit(): void {
-    this.auction.startTime = new Date();
+    const start = new Date();
+    const end = new Date(this.auction.endTime);
+    this.auction.startTime = start.toISOString();
+    this.auction.endTime = end.toISOString();
+
     this.auction.item.categories = this.categories.map(name => ({ name }));
+    
     this.auctionService.addAuction(this.auction).subscribe({
       next: (savedAuction) => {
         alert("Auction submitted successfully!");
