@@ -54,8 +54,11 @@
         
         <div *ngIf="auction.seller?.userid === user?.userid; else justDetails" class="auction-actions">
             <button (click)="viewAuctionDetails(auction.auctionid)">Details</button>
-            <button (click)="editAuction(auction.auctionid)" [disabled]="!auction.active">
-                {{ auction.active ? 'Edit Auction' : 'Auction already ended' }}
+            <button (click)="editAuction(auction.auctionid)">Edit Auction</button>
+            <button
+                *ngIf="user && auction.seller.userid === user.userid"
+                (click)="goToChat(auction.auctionid)">
+                Chat with winner
             </button>
         </div>
 

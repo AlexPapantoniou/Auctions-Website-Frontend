@@ -14,7 +14,9 @@ export class AdminComponent implements OnInit {
   users: User[] = [];
   message: string = '';
 
-  constructor(private adminService: AdminService) {}
+  constructor(
+    private adminService: AdminService
+  ) {}
 
   ngOnInit(): void {
     this.loadUsers();
@@ -42,6 +44,17 @@ export class AdminComponent implements OnInit {
         this.loadUsers();
       },
       error: (err) => console.error(err)
+    });
+  }
+
+  downloadXml(): void {
+    this.adminService.exportXml().subscribe(data => {
+      const blob = new Blob([data], { type: 'application/xml' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'auction.xml';
+      a.click();
     });
   }
 }

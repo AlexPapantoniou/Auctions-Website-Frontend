@@ -16,6 +16,10 @@ export class MessageService {
   }
 
   sendMessage(message: Message): Observable<Message> {
-    return this.http.post<Message>(this.apiUrl, message);
+    return this.http.post<Message>(`${this.apiUrl}/send`, message);
+  }
+
+  deleteMessage(messageid: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/delete/${messageid}`);
   }
 }

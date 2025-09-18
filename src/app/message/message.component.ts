@@ -37,9 +37,9 @@ export class MessageComponent {
     if (auctionid) {
       this.auctionService.getAuctionById(auctionid).subscribe(data => {
         this.auction = data;
+        this.loadMessages();
       });
     }
-    this.loadMessages();
   }
 
   loadMessages(): void {
@@ -56,16 +56,31 @@ export class MessageComponent {
     const message: Message = {
       messageid: 0,
       sender: this.user,
-      receiver: this.auction.seller,
       auction: this.auction,
       content: this.newMessageContent,
-      timestamp: new Date().toString(),
+      timestamp: new Date().toISOString(),
       read: false
     };
 
     this.messageService.sendMessage(message).subscribe(savedMessage => {
       this.messages.push(savedMessage);
       this.newMessageContent = '';
+      this.loadMessages();
     });
+  }
+
+  deleteMessage(messageid: number): void {
+    if (confirm('Are you sure you want to delete this message?')) {
+      this.messageService.deleteMessage(messageid).subscribe({
+        next: () => {
+          this.messages = this.messages.filter(m => m.messageid != messageid);
+          this.loadMessages();
+        },
+        error: (err) => {
+          console.error('Error deleting message: ' + err);
+          alert('Error deleting message');
+        }
+      });
+    }
   }
 }

@@ -8,19 +8,23 @@ import { User } from '../model/user.model';
   providedIn: 'root'
 })
 export class AdminService {
-  private baseUrl = '/auctions/admin';
+  private apiUrl = '/auctions/admin';
 
   constructor(private http: HttpClient) {}
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}/users`);
+    return this.http.get<User[]>(`${this.apiUrl}/users`);
   }
 
   acceptUser(userid: number): Observable<User> {
-    return this.http.put<User>(`${this.baseUrl}/users/${userid}/accept`, {});
+    return this.http.put<User>(`${this.apiUrl}/users/${userid}/accept`, {});
   }
 
   deleteUser(userid: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/users/${userid}/delete`);
+    return this.http.delete<void>(`${this.apiUrl}/users/${userid}/delete`);
+  }
+
+  exportXml(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/export/xml`, { responseType: 'text' })
   }
 }

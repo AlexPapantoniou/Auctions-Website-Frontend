@@ -176,12 +176,21 @@ export class SellerComponent {
     const currentDate: Date = new Date();
     const startDate = new Date(auction.startTime);
 
+    if (!auction.active) {
+      alert('You cannot edit an auction that is not currently active');
+      return;
+    }
+
     if ((startDate.getTime() <= currentDate.getTime()) && (auction.numberOfBids > 0)) {
       alert('You cannot edit an auction that has already started and has bids.');
       return;
     }
 
     this.router.navigate(['app-edit-auction', auctionid]);
+  }
+
+  goToChat(auctionid: number): void {
+    this.router.navigate(['app-message', this.user.userid, auctionid]);
   }
 
   nextPage() {
