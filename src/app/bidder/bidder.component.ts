@@ -1,3 +1,4 @@
+import { RecommendationsService } from './../services/recommendations.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -34,7 +35,8 @@ export class BidderComponent {
     private router: Router,
     private userService: UserService,
     private auctionService: AuctionService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private recommendationsService: RecommendationsService
   ) {}
 
   ngOnInit(): void {
@@ -147,6 +149,7 @@ export class BidderComponent {
   }
 
   viewAuctionDetails(auctionid: number): void {
+    this.recommendationsService.logInteraction(this.user.userid, auctionid, 'VIEW', 1.0);
     this.router.navigate(['/app-auction-details', this.user.userid, auctionid]);
   }
   

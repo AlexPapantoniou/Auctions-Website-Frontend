@@ -27,6 +27,7 @@ import { ReauctionComponent } from './reauction/reauction.component';
 import { ItemService } from './services/item.service';
 import { MessageComponent } from './message/message.component';
 import { MessageService } from './services/message.service';
+import { RecommendationsService } from './services/recommendations.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { MessageService } from './services/message.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService, AdminService, AuctionService, ItemService, MessageService],
+  providers: [UserService, AdminService, AuctionService, ItemService, MessageService, RecommendationsService],
   bootstrap: [AppComponent]
 })
 

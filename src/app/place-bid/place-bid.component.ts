@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionService } from '../services/auction.service';
 import { BidService } from '../services/bid.service';
+import { RecommendationsService } from '../services/recommendations.service';
 
 @Component({
   selector: 'app-place-bid',
@@ -32,7 +33,8 @@ export class PlaceBidComponent {
     private router: Router,
     private userService: UserService,
     private auctionService: AuctionService,
-    private bidService: BidService
+    private bidService: BidService,
+    private recommendationsService: RecommendationsService
   ) {}
 
   ngOnInit(): void {
@@ -80,9 +82,17 @@ export class PlaceBidComponent {
       return;
     }
 
+    if (this.newBidAmount >= this.auction.buyPrice) { 
+      if (confirm("By bidding " + this.newBidAmount + ", you will instantly buy the item. Confirm?")) {
+        this.buyNow();
+      }
+      return;
+    }
+
     this.bidService.placeBid(this.auction.auctionid, this.user.userid, this.newBidAmount).subscribe({
       next: () => {
         alert('Bid placed successfully!');
+        this.recommendationsService.logInteraction(this.user.userid, this.auction.auctionid, 'BID', this.newBidAmount);
         this.loadBids();
         this.newBidAmount = 0;
       },

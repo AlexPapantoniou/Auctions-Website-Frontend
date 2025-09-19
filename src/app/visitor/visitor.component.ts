@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { AuctionService } from '../services/auction.service';
 import { CategoryService } from '../services/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RecommendationsService } from '../services/recommendations.service';
 
 @Component({
   selector: 'app-visitor',
@@ -34,7 +35,8 @@ export class VisitorComponent {
     private router: Router,
     private userService: UserService,
     private auctionService: AuctionService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private recommendationsService: RecommendationsService
   ) {}
 
   ngOnInit(): void {
@@ -155,6 +157,7 @@ export class VisitorComponent {
   }
 
   viewAuctionDetails(auctionid: number): void {
+    this.recommendationsService.logInteraction(this.user.userid, auctionid, 'VIEW', 1.0);
     this.router.navigate(['app-auction-details', this.user.userid, auctionid]);
   }
 
