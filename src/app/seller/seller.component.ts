@@ -44,12 +44,13 @@ export class SellerComponent {
     if (userid) {
       this.userService.getUserById(userid).subscribe(data => {
         this.user = data;
+        // this.loadAuctions();
+        this.loadAuctionsOrdered();
+        this.loadCategories();
+        this.loadLocations();
+        this.loadCities();
+        this.loadCountries();
       });
-      this.loadAuctions();
-      this.loadCategories();
-      this.loadLocations();
-      this.loadCities();
-      this.loadCountries();
     }
   }
 
@@ -81,6 +82,13 @@ export class SellerComponent {
   loadCountries(): void {
     this.auctionService.getAllCountries().subscribe(data => {
       this.countries = data;
+    });
+  }
+
+  loadAuctionsOrdered(): void {
+    this.auctionService.getAuctionsOrdered(this.user.userid, this.page, this.size).subscribe(data => {
+      this.auctions = data.content;
+      this.totalPages = data.totalPages;
     });
   }
 
@@ -169,7 +177,15 @@ export class SellerComponent {
   }
   
   viewAuctionDetails(auctionid: number): void {
-    this.recommendationsService.logInteraction(this.user.userid, auctionid, 'VIEW', 1.0);
+    this.recommendationsService.logInteraction(this.user.userid, auctionid, 'VIEW', 1.0).subscribe({
+      next: (loggedInteraction) => {
+        alert("Interaction logged successfully");
+      },
+      error: (err) => {
+        alert("Error logging interaction")
+        console.log("Error logging interaction: " + err);
+      }
+  });
     this.router.navigate(['/app-auction-details', this.user.userid, auctionid]);
   }
 
