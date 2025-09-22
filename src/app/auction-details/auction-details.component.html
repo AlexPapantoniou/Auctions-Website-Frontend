@@ -24,7 +24,7 @@
           <p><b>Bidder city:</b> {{ bid.bidder.city }}</p>
           <p><b>Bidder country:</b> {{ bid.bidder.country }}</p>
         </div>
-        <p><b>Time:</b> {{ bid.time }}</p>
+        <p><b>Time:</b> {{ bid.time | date: 'medium' }}</p>
         <p><b>Amount:</b> {{ bid.amount }}</p>
       </div>
     </div>

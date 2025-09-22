@@ -18,6 +18,7 @@ export class BidderComponent {
   page = 0;
   size = 3;
   totalPages = 0;
+  activeOnly: boolean = false;
 
   keyword = '';
 
@@ -44,17 +45,24 @@ export class BidderComponent {
     if (userid) {
       this.userService.getUserById(userid).subscribe(data => {
         this.user = data;
+        this.loadAuctionsOrdered();
+        this.loadCategories();
+        this.loadLocations();
+        this.loadCities();
+        this.loadCountries();
       });
     }
-    this.loadAuctions();
-    this.loadCategories();
-    this.loadLocations();
-    this.loadCities();
-    this.loadCountries();
   }
 
   loadAuctions(): void {
     this.auctionService.getAllAuctions(this.page, this.size).subscribe(data => {
+      this.auctions = data.content;
+      this.totalPages = data.totalPages;
+    });
+  }
+
+  loadAuctionsOrdered(): void {
+    this.auctionService.getAuctionsOrdered(this.user.userid, this.activeOnly, this.page, this.size).subscribe(data => {
       this.auctions = data.content;
       this.totalPages = data.totalPages;
     });
@@ -174,6 +182,7 @@ export class BidderComponent {
     this.selectedCategory = '';
     this.selectedLocation = '';
     this.selectedCountry = '';
+    this.activeOnly = false;
     this.loadAuctions();
   }
 

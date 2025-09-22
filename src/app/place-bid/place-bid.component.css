@@ -25,6 +25,10 @@ div[ngIf="auction"] {
   margin: 20px auto;
   padding: 0 20px;
   font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 /* Auction title */
@@ -36,7 +40,13 @@ h1 {
 }
 
 /* Past bid cards */
+/* div[ngIf="bids.length > 0"] {
+} */
+
 .bid-card {
+  width: 60%;
+  max-width: 500px;
+  text-align: left;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 12px 15px;
@@ -90,7 +100,6 @@ h1 {
   color: #555;
 }
 
-/* New bid form */
 .new-bid {
   margin-top: 20px;
   padding: 15px;
@@ -101,7 +110,8 @@ h1 {
 
 .new-bid form {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
 }
 
@@ -111,19 +121,21 @@ h1 {
 }
 
 .new-bid input[type="number"] {
-  padding: 6px 10px;
+  flex: 0 0 120px;
+  padding: 4px 8px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .new-bid button[type="submit"] {
-  padding: 8px 12px;
+  flex: 0 0 auto;
+  padding: 6px 10px;
   border-radius: 5px;
   border: none;
   background-color: #28a745;
   color: white;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -135,6 +147,31 @@ h1 {
 .new-bid button[type="submit"]:disabled {
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+/* Buy Now button */
+.buy-now-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  background-color: #ff5722;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.buy-now-button:hover:not(:disabled) {
+  background-color: #e64a19;
+  transform: translateY(-1px);
+}
+
+.buy-now-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* No bids message */

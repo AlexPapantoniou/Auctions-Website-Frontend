@@ -56,8 +56,8 @@ export class AuctionService {
     return this.http.get(`${this.apiUrl}/country/${encodeURIComponent(country)}?page=${page}&size=${size}`);
   }
 
-  getAuctionsOrdered(userId: number, page: number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/ordered/${userId}?page=${page}&size=${size}`);
+  getAuctionsOrdered(userId: number, activeOnly: boolean, page: number, size: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/ordered/${userId}?activeOnly=${activeOnly}&page=${page}&size=${size}`);
   }
 
   addAuction(auction: Auction): Observable<Auction> {

@@ -44,6 +44,13 @@
         <div class="clear-row">
             <button class="clear-filters" (click)="clearFilters()">Clear Filters</button>
         </div>
+
+        <label class="checkbox-row">
+            <input type="checkbox" [(ngModel)]="activeOnly" (change)="loadAuctionsOrdered()" />
+            <span class="checkmark"></span>
+            Show only active auctions
+        </label>
+
     </div>
 
     <div *ngFor="let auction of auctions" class="auction-card">

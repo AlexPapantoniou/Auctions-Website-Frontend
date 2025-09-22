@@ -44,15 +44,21 @@
         <div class="clear-row">
             <button class="clear-filters" (click)="clearFilters()">Clear Filters</button>
         </div>
+
+        <label class="checkbox-row">
+            <input type="checkbox" [(ngModel)]="activeOnly" (change)="loadAuctionsOrdered()" />
+            <span class="checkmark"></span>
+            Show only active auctions
+        </label>
+
     </div>
 
     <div *ngFor="let auction of auctions" class="auction-card">
         <h3>{{ auction.item.name }} {{ auction.active ? '(active)' : '(inactive)' }}</h3>
         <p>{{ auction.item.description }}</p>
 
-        <div class="details-button">
+        <div class="auction-actions">
             <button (click)="viewAuctionDetails(auction.auctionid)">Details</button>
-
             <button
                 *ngIf="user && auction.winner?.userid === user.userid"
                 (click)="goToChat(auction.auctionid)">

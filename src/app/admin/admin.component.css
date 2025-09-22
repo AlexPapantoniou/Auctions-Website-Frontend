@@ -32,7 +32,7 @@ table th {
   background-color: #f2f2f2;
 }
 
-.accept-btn {
+.accept-button {
   background-color: #4CAF50;
   color: white;
   padding: 5px 10px;
@@ -42,11 +42,11 @@ table th {
   margin-right: 5px;
 }
 
-.accept-btn:hover {
+.accept-button:hover {
   background-color: #45a049;
 }
 
-.reject-btn {
+.reject-button {
   background-color: #f44336;
   color: white;
   padding: 5px 10px;
@@ -55,6 +55,44 @@ table th {
   cursor: pointer;
 }
 
-.reject-btn:hover {
+.reject-button:hover {
   background-color: #da190b;
+}
+
+/* Container for XML button */
+.xml-button {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Styled button */
+.xml-button button {
+  background-color: #4caf50; /* Green background */
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* Hover effect */
+.xml-button button:hover {
+  background-color: #45a049;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Active click effect */
+.xml-button button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* Optional: make it stand out more */
+.xml-button button::before {
+  content: "⬇️ ";
 }

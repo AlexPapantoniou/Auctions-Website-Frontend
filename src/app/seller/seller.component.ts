@@ -18,6 +18,7 @@ export class SellerComponent {
   page = 0;
   size = 3;
   totalPages = 0;
+  activeOnly: boolean = false;
 
   keyword = '';
 
@@ -44,7 +45,6 @@ export class SellerComponent {
     if (userid) {
       this.userService.getUserById(userid).subscribe(data => {
         this.user = data;
-        // this.loadAuctions();
         this.loadAuctionsOrdered();
         this.loadCategories();
         this.loadLocations();
@@ -53,9 +53,16 @@ export class SellerComponent {
       });
     }
   }
-
+  
   loadAuctions(): void {
     this.auctionService.getAllAuctions(this.page, this.size).subscribe(data => {
+      this.auctions = data.content;
+      this.totalPages = data.totalPages;
+    });
+  }
+
+  loadAuctionsOrdered(): void {
+    this.auctionService.getAuctionsOrdered(this.user.userid,this.activeOnly, this.page, this.size).subscribe(data => {
       this.auctions = data.content;
       this.totalPages = data.totalPages;
     });
@@ -82,13 +89,6 @@ export class SellerComponent {
   loadCountries(): void {
     this.auctionService.getAllCountries().subscribe(data => {
       this.countries = data;
-    });
-  }
-
-  loadAuctionsOrdered(): void {
-    this.auctionService.getAuctionsOrdered(this.user.userid, this.page, this.size).subscribe(data => {
-      this.auctions = data.content;
-      this.totalPages = data.totalPages;
     });
   }
 
@@ -173,6 +173,7 @@ export class SellerComponent {
     this.selectedCategory = '';
     this.selectedLocation = '';
     this.selectedCountry = '';
+    this.activeOnly = false;
     this.loadAuctions();
   }
   

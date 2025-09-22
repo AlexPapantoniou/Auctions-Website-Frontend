@@ -7,8 +7,8 @@
   <div *ngIf="bids.length > 0; else noBids">
     <div *ngFor="let bid of bids" class="bid-card">
       <p><b>Amount:</b> {{ bid.amount }}</p>
-      <p><b>Time:</b> {{ bid.time }}</p>
-      <p><b>Bidder:</b> {{ bid.bidder.username }} (Rating: {{ bid.bidder.rating }})</p>
+      <p><b>Time:</b> {{ bid.time | date: 'medium' }}</p>
+      <p><b>Bidder:</b> {{ bid.bidder.username }} (Rating: {{ bid.bidder.bidderRating }})</p>
     </div>
     
     <div class="pagination">
@@ -30,6 +30,6 @@
     </form>
   </div>
 
-  <button (click)="buyNow()" [disabled]="!auction.active">Buy Now</button>
+  <button class="buy-now-button" (click)="buyNow()" [disabled]="!auction.active">Buy Now</button>
   
 </div>

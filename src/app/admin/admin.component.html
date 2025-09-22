@@ -37,12 +37,12 @@
                             *ngIf="!user.accepted" 
                             (click)="acceptUser(user.userid!)"
                             [disabled]="user.accepted"
-                            class="accept-btn">
+                            class="accept-button">
                             Accept
                         </button>
                         <button 
                             (click)="deleteUser(user.userid!)"
-                            class="reject-btn">
+                            class="reject-button">
                             Reject
                         </button>
                     </td>
@@ -50,6 +50,9 @@
             </tbody>
         </table>
 
+    </div>
+
+    <div class="xml-button">
         <button (click)="downloadXml()">Export auctions (XML)</button>
     </div>
 </div>
