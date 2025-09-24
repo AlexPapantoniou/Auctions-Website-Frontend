@@ -1,3 +1,4 @@
+import { CreateMessageDTO } from './../model/createMessageDTO';
 import { UserService } from './../services/user.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -14,10 +15,10 @@ import { Auction } from '../model/auction.model';
   styleUrl: './message.component.css'
 })
 export class MessageComponent {
+  user!: User;
   auction!: Auction;
   messages: Message[] = [];
   newMessageContent: string = '';
-  user!: User;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,13 +54,11 @@ export class MessageComponent {
       return;
     }
 
-    const message: Message = {
-      messageid: 0,
+    const message: CreateMessageDTO = {
       sender: this.user,
       auction: this.auction,
       content: this.newMessageContent,
       timestamp: new Date().toISOString(),
-      read: false
     };
 
     this.messageService.sendMessage(message).subscribe(savedMessage => {

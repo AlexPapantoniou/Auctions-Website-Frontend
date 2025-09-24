@@ -91,7 +91,6 @@ export class PlaceBidComponent {
 
     this.bidService.placeBid(this.auction.auctionid, this.user.userid, this.newBidAmount).subscribe({
       next: () => {
-        alert('Bid placed successfully!');
         this.recommendationsService.logInteraction(this.user.userid, this.auction.auctionid, 'BID', this.newBidAmount);
         this.loadBids();
         this.newBidAmount = 0;

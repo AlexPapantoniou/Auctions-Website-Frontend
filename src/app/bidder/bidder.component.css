@@ -64,8 +64,8 @@
 .search-row button {
   padding: 8px 16px;
   background-color: #007bff;
-  border: none;
   color: white;
+  border: none;
   border-radius: 6px;
   cursor: pointer;
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../services/admin.service';
 
 import { User } from '../model/user.model';
+import { ExportService } from '../services/export.service';
 
 @Component({
   selector: 'app-admin',
@@ -15,7 +16,8 @@ export class AdminComponent implements OnInit {
   message: string = '';
 
   constructor(
-    private adminService: AdminService
+    private adminService: AdminService,
+    private exportService: ExportService
   ) {}
 
   ngOnInit(): void {
@@ -48,13 +50,24 @@ export class AdminComponent implements OnInit {
   }
 
   downloadXml(): void {
-    this.adminService.exportXml().subscribe(data => {
+    this.exportService.exportXml().subscribe(data => {
       const blob = new Blob([data], { type: 'application/xml' });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
       a.download = 'auction.xml';
       a.click();
+    });
+  }
+
+  downloadJSON(): void {
+    this.exportService.exportJSON().subscribe((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'auctions.json';
+      a.click();
+      window.URL.revokeObjectURL(url);
     });
   }
 }

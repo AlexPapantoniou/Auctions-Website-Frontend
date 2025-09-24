@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
 
@@ -14,13 +14,10 @@ export class ItemMapComponent implements AfterViewInit {
   constructor(private route: ActivatedRoute) {}
 
   ngAfterViewInit(): void {
-      this.route.paramMap.subscribe(params => {
-        this.location = params.get('location') || '';
-
-        if (this.location) {
-          this.loadMap(this.location);
-        }
-      });
+    this.location = this.route.snapshot.params['location'];
+      if (this.location) {
+        this.loadMap(this.location);
+      }
   }
 
   private async loadMap(location: string) {

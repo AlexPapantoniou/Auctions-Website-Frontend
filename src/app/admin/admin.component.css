@@ -60,13 +60,17 @@ table th {
 }
 
 /* Container for XML button */
-.xml-button {
+.export-buttons {
   margin-top: 20px;
-  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
 }
 
 /* Styled button */
-.xml-button button {
+.export-buttons button {
   background-color: #4caf50; /* Green background */
   color: white;
   font-size: 16px;
@@ -80,19 +84,18 @@ table th {
 }
 
 /* Hover effect */
-.xml-button button:hover {
+.export-buttons button:hover {
   background-color: #45a049;
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 /* Active click effect */
-.xml-button button:active {
+.export-buttons button:active {
   transform: translateY(0);
   box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
 
-/* Optional: make it stand out more */
-.xml-button button::before {
+.export-buttons button::before {
   content: "⬇️ ";
 }

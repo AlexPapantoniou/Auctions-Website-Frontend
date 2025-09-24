@@ -178,15 +178,7 @@ export class SellerComponent {
   }
   
   viewAuctionDetails(auctionid: number): void {
-    this.recommendationsService.logInteraction(this.user.userid, auctionid, 'VIEW', 1.0).subscribe({
-      next: (loggedInteraction) => {
-        alert("Interaction logged successfully");
-      },
-      error: (err) => {
-        alert("Error logging interaction")
-        console.log("Error logging interaction: " + err);
-      }
-  });
+    this.recommendationsService.logInteraction(this.user.userid, auctionid, 'VIEW', 1.0);
     this.router.navigate(['/app-auction-details', this.user.userid, auctionid]);
   }
 
@@ -195,9 +187,10 @@ export class SellerComponent {
 
     const currentDate: Date = new Date();
     const startDate = new Date(auction.startTime);
-
-    if (!auction.active) {
-      alert('You cannot edit an auction that is not currently active');
+    const endDate = new Date(auction.endTime);
+    
+    if (endDate <= currentDate) {
+      alert('You cannot edit an auction that has already ended');
       return;
     }
 

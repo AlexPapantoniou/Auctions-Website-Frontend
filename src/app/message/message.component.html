@@ -7,7 +7,7 @@
             class="message">
 
             <strong>{{ message.sender.firstname }}:</strong> {{ message.content }}
-            <small>{{ message.timestamp | date: 'short' }}</small>
+            <small>({{ message.timestamp | date: 'short' }})</small>
 
             <button (click)="deleteMessage(message.messageid)">Delete</button>
         </div>

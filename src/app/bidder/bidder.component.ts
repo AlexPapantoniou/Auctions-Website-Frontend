@@ -164,13 +164,13 @@ export class BidderComponent {
   placeBid(auctionid: number): void {
     const auction = this.auctions.find(a => a.auctionid === auctionid);
     
-    if (auction && auction.seller.userid === this.user.userid) {
-      alert("You cannot bid on your own auction.");
-      return;
-    }
-
     if (auction && !auction.active) {
       alert("This auction has already ended.");
+      return;
+    }
+    
+    if (auction && auction.seller.userid === this.user.userid) {
+      alert("You cannot bid on your own auction.");
       return;
     }
     

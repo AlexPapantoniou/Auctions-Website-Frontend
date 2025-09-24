@@ -23,8 +23,5 @@ export class AdminService {
   deleteUser(userid: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/users/${userid}/delete`);
   }
-
-  exportXml(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/export/xml`, { responseType: 'text' })
-  }
+  
 }
