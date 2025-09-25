@@ -18,10 +18,13 @@ export class EditAuctionComponent {
   ) {}
 
   ngOnInit(): void {
-    const auctionid = Number(this.route.snapshot.params['id']);
+    const auctionid = Number(this.route.snapshot.params['auctionid']);
     if (auctionid) {
-      this.auctionService.getAuctionById(auctionid).subscribe(data => {
-        this.auction = data;
+      this.auctionService.getAuctionById(auctionid).subscribe({
+        next: (auction) => {
+          this.auction = auction;
+        },
+        error: (err) => console.error(err)
       });
     }
   }

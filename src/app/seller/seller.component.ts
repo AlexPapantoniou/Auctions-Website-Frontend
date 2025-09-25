@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { AuctionService } from '../services/auction.service';
 import { CategoryService } from '../services/category.service';
 import { RecommendationsService } from '../services/recommendations.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-seller',
@@ -37,34 +38,40 @@ export class SellerComponent {
     private userService: UserService,
     private auctionService: AuctionService,
     private categoryService: CategoryService,
+    private messageService: MessageService,
     private recommendationsService: RecommendationsService
   ) {}
 
   ngOnInit(): void {
-    const userid = Number(this.route.snapshot.params['id']);
+    const userid = Number(this.route.snapshot.params['userid']);
     if (userid) {
-      this.userService.getUserById(userid).subscribe(data => {
-        this.user = data;
-        this.loadAuctionsOrdered();
-        this.loadCategories();
-        this.loadLocations();
-        this.loadCities();
-        this.loadCountries();
+      this.userService.getUserById(userid).subscribe({
+        next: (user) => {
+          this.user = user;
+          this.loadAuctionsOrdered();
+          this.loadCategories();
+          this.loadLocations();
+          this.loadCities();
+          this.loadCountries();
+        },
+        error: (err) => console.error(err)
       });
     }
   }
   
-  loadAuctions(): void {
-    this.auctionService.getAllAuctions(this.page, this.size).subscribe(data => {
-      this.auctions = data.content;
-      this.totalPages = data.totalPages;
-    });
-  }
-
   loadAuctionsOrdered(): void {
     this.auctionService.getAuctionsOrdered(this.user.userid,this.activeOnly, this.page, this.size).subscribe(data => {
       this.auctions = data.content;
       this.totalPages = data.totalPages;
+
+      this.auctions.forEach(auction => {
+        this.messageService.getUnreadMessagesCount(auction.auctionid, this.user.userid).subscribe({
+          next: (count) => {
+            (auction as any).unreadMessages = count;
+          },
+          error: (err) => console.error(err)
+        });
+      });
     });
   }
 
@@ -104,7 +111,7 @@ export class SellerComponent {
       });
     }
     else {
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
@@ -116,7 +123,7 @@ export class SellerComponent {
       });
     }
     else {
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
@@ -128,7 +135,7 @@ export class SellerComponent {
       });
     }
     else {
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
@@ -140,7 +147,7 @@ export class SellerComponent {
       });
     }
     else {
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
@@ -152,7 +159,7 @@ export class SellerComponent {
       });
     }
     else {
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
@@ -164,7 +171,7 @@ export class SellerComponent {
       });
     }
     else {
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
@@ -174,7 +181,7 @@ export class SellerComponent {
     this.selectedLocation = '';
     this.selectedCountry = '';
     this.activeOnly = false;
-    this.loadAuctions();
+    this.loadAuctionsOrdered();
   }
   
   viewAuctionDetails(auctionid: number): void {
@@ -209,14 +216,14 @@ export class SellerComponent {
   nextPage() {
     if (this.page < this.totalPages - 1) {
       this.page++;
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
   prevPage() {
     if (this.page > 0) {
       this.page--;
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 

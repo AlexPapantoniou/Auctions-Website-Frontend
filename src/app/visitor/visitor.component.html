@@ -7,8 +7,9 @@
         <h2>Here are the currently active auctions</h2>
     </div>
 
+    <!-- Serach bar and filters -->
     <div class="search-filter-container">
-        <!-- Row 1: Search -->
+        <!-- Row 1: Search bar -->
         <div class="search-row">
             <input
             type="text"
@@ -17,7 +18,7 @@
             <button (click)="search()">Search</button>
         </div>
 
-        <!-- Row 2: Select filters -->
+        <!-- Row 2: Select filters based on category, location, city and country -->
         <div class="filters-row">
             <select [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
             <option value="">All Categories</option>
@@ -53,16 +54,18 @@
 
     </div>
 
+    <!-- Container with the available, paginated auctions based on the filters selected -->
     <div *ngFor="let auction of auctions" class="auction-card">
         <h3>{{ auction.item.name }} {{ auction.active ? '(active)' : '(inactive)' }}</h3>
         <p>{{ auction.item.description }}</p>
 
         <div class="auction-actions">
             <button (click)="viewAuctionDetails(auction.auctionid)">Details</button>
+            <!-- Chat with the seller of the auction is only available if the current in user is the winner -->
             <button
                 *ngIf="user && auction.winner?.userid === user.userid"
                 (click)="goToChat(auction.auctionid)">
-                Chat with seller
+                Chat with seller ({{ auction.unreadMessages }} unread messages)
             </button>
         </div>
     </div>

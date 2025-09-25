@@ -13,6 +13,9 @@ import { CreateAuctionComponent } from './create-auction/create-auction.componen
 import { AuctionDetailsComponent } from './auction-details/auction-details.component';
 import { PlaceBidComponent } from './place-bid/place-bid.component';
 import { ItemMapComponent } from './item-map/item-map.component';
+import { EditAuctionComponent } from './edit-auction/edit-auction.component';
+import { ReauctionComponent } from './reauction/reauction.component';
+import { MessageComponent } from './message/message.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -21,11 +24,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { UserService } from './services/user.service';
 import { AdminService } from './services/admin.service';
+import { ExportService } from './services/export.service';
 import { AuctionService } from './services/auction.service';
-import { EditAuctionComponent } from './edit-auction/edit-auction.component';
-import { ReauctionComponent } from './reauction/reauction.component';
 import { ItemService } from './services/item.service';
-import { MessageComponent } from './message/message.component';
 import { MessageService } from './services/message.service';
 import { RecommendationsService } from './services/recommendations.service';
 
@@ -54,7 +55,7 @@ import { RecommendationsService } from './services/recommendations.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService, AdminService, AuctionService, ItemService, MessageService, RecommendationsService],
+  providers: [UserService, AdminService, ExportService, AuctionService, ItemService, MessageService, RecommendationsService],
   bootstrap: [AppComponent]
 })
 

@@ -39,14 +39,22 @@ export class PlaceBidComponent {
 
   ngOnInit(): void {
     const userid = Number(this.route.snapshot.params['userid']);
-    const auctionid = Number(this.route.snapshot.params['auctionid']);
-    if (userid && auctionid) {
-      this.userService.getUserById(userid).subscribe(data => {
-        this.user = data;
+    if (userid) {
+      this.userService.getUserById(userid).subscribe({
+        next: (user) => {
+          this.user = user;
+        },
+          error: (err) => console.log(err)
       });
-      this.auctionService.getAuctionById(auctionid).subscribe(data => {
-        this.auction = data;
-        this.loadBids();
+    }
+    const auctionid = Number(this.route.snapshot.params['auctionid']);
+    if (auctionid) {
+      this.auctionService.getAuctionById(auctionid).subscribe({
+        next: (auction) => {
+          this.auction = auction;
+          this.loadBids();
+        },
+          error: (err) => console.log(err)
       });
     }
   }

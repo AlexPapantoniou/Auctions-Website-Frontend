@@ -59,7 +59,11 @@
 
         <div class="auction-actions">
             <button (click)="viewAuctionDetails(auction.auctionid)">Details</button>
-            <button (click)="placeBid(auction.auctionid)">Place bid</button>
+            <button
+                *ngIf="auction.seller.userid !== user.userid"
+                (click)="placeBid(auction.auctionid)">
+                Place bid
+            </button>
         </div>
     </div>
 

@@ -11,8 +11,18 @@ import { User } from '../model/user.model';
   styleUrl: './signup.component.css',
 })
 export class SignupComponent {
-  user: User = { username: '', password: '', firstname: '', lastname: '', city: '', country: '', email: '', phonenumber: '', afm: '', accepted: false };
-  message: string = '';
+  user: User = { 
+    username: '',
+    password: '',
+    firstname: '',
+    lastname: '',
+    city: '',
+    country: '',
+    email: '',
+    phonenumber: '',
+    afm: '',
+    accepted: false
+  };
 
   constructor(
     private userService: UserService,
@@ -25,8 +35,19 @@ export class SignupComponent {
       return;
     }
     this.userService.signup(this.user).subscribe({
-      next: (savedUser) => {
-        this.user = { username: '', password: '', firstname: '', lastname: '', city: '', country: '', email: '', phonenumber: '', afm: '', accepted: false };
+      next: () => {
+        this.user = { 
+          username: '',
+          password: '',
+          firstname: '',
+          lastname: '',
+          city: '',
+          country: '',
+          email: '',
+          phonenumber: '',
+          afm: '',
+          accepted: false
+        };
         this.router.navigate(['/app-waiting']);
       },
       error: (err) => {

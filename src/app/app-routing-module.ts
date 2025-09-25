@@ -36,27 +36,27 @@ export const routes: Routes = [
     component: WaitingComponent
   },
   {
-    path: 'app-main-visitor/:id',
-    component: MainVisitorComponent
-  },
-  {
-    path: 'app-visitor/:id',
-    component: VisitorComponent
-  },
-  {
-    path: 'app-bidder/:id',
-    component: BidderComponent
-  },
-  {
-    path: 'app-seller/:id',
-    component: SellerComponent
-  },
-  {
     path: 'app-admin',
     component: AdminComponent
   },
   {
-    path: 'app-create-auction/:id',
+    path: 'app-main-visitor/:userid',
+    component: MainVisitorComponent
+  },
+  {
+    path: 'app-visitor/:userid',
+    component: VisitorComponent
+  },
+  {
+    path: 'app-bidder/:userid',
+    component: BidderComponent
+  },
+  {
+    path: 'app-seller/:userid',
+    component: SellerComponent
+  },
+  {
+    path: 'app-create-auction/:userid',
     component: CreateAuctionComponent
   },
   {
@@ -72,18 +72,18 @@ export const routes: Routes = [
     component: ItemMapComponent
   },
   {
-    path: 'app-edit-auction/:id',
+    path: 'app-edit-auction/:auctionid',
     component: EditAuctionComponent
   },
   {
-    path: 'app-reauction/:id',
+    path: 'app-reauction/:userid',
     component: ReauctionComponent
   },
   {
     path: 'app-message/:userid/:auctionid',
     component: MessageComponent
   }
-]; 
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

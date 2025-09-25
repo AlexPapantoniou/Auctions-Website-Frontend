@@ -30,15 +30,21 @@ export class AuctionDetailsComponent {
   ngOnInit(): void {
     const auctionid = Number(this.route.snapshot.params['auctionid']);
     if (auctionid) {
-      this.auctionService.getAuctionById(auctionid).subscribe(data => {
-        this.auction = data;
-        this.loadBids();
+      this.auctionService.getAuctionById(auctionid).subscribe({
+        next: (auction) => {
+          this.auction = auction;
+          this.loadBids();
+        },
+          error: (err) => console.error(err)
       });
     }
     const userid = Number(this.route.snapshot.params['userid']);
     if (userid) {
-      this.userService.getUserById(userid).subscribe(data => {
-        this.user = data;
+      this.userService.getUserById(userid).subscribe({
+        next: (user) => {
+          this.user = user;
+        },
+        error: (err) => console.error(err)
       });
     }
   }

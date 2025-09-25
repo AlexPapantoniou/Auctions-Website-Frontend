@@ -67,10 +67,11 @@
                 (click)="editAuction(auction.auctionid)">
                 Edit Auction
             </button>
+            <!-- Chat with winner of auction is only available if the auction has a winner -->
             <button
-                *ngIf="user && auction.winner && auction.seller.userid === user.userid"
+                *ngIf="user && auction.seller.userid === user.userid && auction.winner"
                 (click)="goToChat(auction.auctionid)">
-                Chat with winner
+                Chat with winner ({{ auction.unreadMessages }} unread messages)
             </button>
         </div>
     </div>

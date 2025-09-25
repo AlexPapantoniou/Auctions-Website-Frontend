@@ -41,24 +41,20 @@ export class BidderComponent {
   ) {}
 
   ngOnInit(): void {
-    const userid = Number(this.route.snapshot.params['id']);
+    const userid = Number(this.route.snapshot.params['userid']);
     if (userid) {
-      this.userService.getUserById(userid).subscribe(data => {
-        this.user = data;
-        this.loadAuctionsOrdered();
-        this.loadCategories();
-        this.loadLocations();
-        this.loadCities();
-        this.loadCountries();
+      this.userService.getUserById(userid).subscribe({
+        next: (user) => {
+          this.user = user;
+          this.loadAuctionsOrdered();
+          this.loadCategories();
+          this.loadLocations();
+          this.loadCities();
+          this.loadCountries();
+        },
+          error: (err) => console.error(err)
       });
     }
-  }
-
-  loadAuctions(): void {
-    this.auctionService.getAllAuctions(this.page, this.size).subscribe(data => {
-      this.auctions = data.content;
-      this.totalPages = data.totalPages;
-    });
   }
 
   loadAuctionsOrdered(): void {
@@ -104,7 +100,7 @@ export class BidderComponent {
       });
     }
     else {
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
@@ -116,7 +112,7 @@ export class BidderComponent {
       });
     }
     else {
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
@@ -128,7 +124,7 @@ export class BidderComponent {
       });
     }
     else {
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
@@ -140,7 +136,7 @@ export class BidderComponent {
       });
     }
     else {
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
@@ -152,7 +148,7 @@ export class BidderComponent {
       });
     }
     else {
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
@@ -165,12 +161,7 @@ export class BidderComponent {
     const auction = this.auctions.find(a => a.auctionid === auctionid);
     
     if (auction && !auction.active) {
-      alert("This auction has already ended.");
-      return;
-    }
-    
-    if (auction && auction.seller.userid === this.user.userid) {
-      alert("You cannot bid on your own auction.");
+      alert("You cannot place a bid on an inactive auction.");
       return;
     }
     
@@ -183,20 +174,20 @@ export class BidderComponent {
     this.selectedLocation = '';
     this.selectedCountry = '';
     this.activeOnly = false;
-    this.loadAuctions();
+    this.loadAuctionsOrdered();
   }
 
   nextPage() {
     if (this.page < this.totalPages - 1) {
       this.page++;
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 
   prevPage() {
     if (this.page > 0) {
       this.page--;
-      this.loadAuctions();
+      this.loadAuctionsOrdered();
     }
   }
 }

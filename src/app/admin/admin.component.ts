@@ -41,12 +41,14 @@ export class AdminComponent implements OnInit {
   }
 
   deleteUser(userid: number): void {
-    this.adminService.deleteUser(userid).subscribe({
-      next: () => {
-        this.loadUsers();
-      },
-      error: (err) => console.error(err)
-    });
+    if (confirm("Are you sure you want to delete this user? This decision is permanent")) {
+      this.adminService.deleteUser(userid).subscribe({
+        next: () => {
+          this.loadUsers();
+        },
+        error: (err) => console.error(err)
+      });
+    }
   }
 
   downloadXml(): void {

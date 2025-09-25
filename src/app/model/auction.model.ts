@@ -16,4 +16,6 @@ export interface Auction {
     city: string;
     country: string;
     active: boolean;
+    winner: User;
+    unreadMessages?: number;
 }

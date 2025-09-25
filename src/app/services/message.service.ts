@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Message } from '../model/message.model';
-import { CreateMessageDTO } from '../model/createMessageDTO';
+import { CreateMessageDTO } from '../model/createMessageDTO.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,14 @@ export class MessageService {
 
   getMessagesByAuction(auctionid: number): Observable<Message[]> {
     return this.http.get<Message[]>(`${this.apiUrl}/${auctionid}`);
+  }
+
+  getUnreadMessagesCount(auctionid: number, senderid: number): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/${auctionid}/unread-count/${senderid}`);
+  }
+
+  messageWasRead(message: Message): Observable<Message> {
+    return this.http.post<Message>(`${this.apiUrl}/read`, message);
   }
 
   sendMessage(message: CreateMessageDTO): Observable<Message> {

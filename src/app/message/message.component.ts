@@ -1,9 +1,9 @@
-import { CreateMessageDTO } from './../model/createMessageDTO';
-import { UserService } from './../services/user.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuctionService } from '../services/auction.service';
 import { MessageService } from '../services/message.service';
+import { UserService } from './../services/user.service';
+import { CreateMessageDTO } from '../model/createMessageDTO.model';
 import { Message } from '../model/message.model';
 import { User } from '../model/user.model';
 import { Auction } from '../model/auction.model';
@@ -30,22 +30,40 @@ export class MessageComponent {
   ngOnInit(): void {
     const userid = Number(this.route.snapshot.params['userid']);
     if (userid) {
-      this.userService.getUserById(userid).subscribe(data => {
-        this.user = data;
+      this.userService.getUserById(userid).subscribe({
+        next: (user) => {
+          this.user = user;
+        },
+          error: (err) => console.log(err)
       });
     }
     const auctionid = Number(this.route.snapshot.params['auctionid']);
     if (auctionid) {
-      this.auctionService.getAuctionById(auctionid).subscribe(data => {
-        this.auction = data;
-        this.loadMessages();
+      this.auctionService.getAuctionById(auctionid).subscribe({
+        next: (auction) => {
+          this.auction = auction;
+          this.loadMessages();
+        },
+          error: (err) => console.log(err)
       });
     }
   }
 
   loadMessages(): void {
-    this.messageService.getMessagesByAuction(this.auction.auctionid).subscribe(data => {
-      this.messages = data;
+    this.messageService.getMessagesByAuction(this.auction.auctionid).subscribe({
+      next: (messages) => {
+        this.messages = messages;
+
+        messages.forEach(message => {
+          if (message.receiver.userid === this.user.userid) {
+            this.messageService.messageWasRead(message).subscribe({
+              next: () => {},
+              error: (err) => console.error(err)
+            });
+          }
+        });
+      },
+      error: (err) => console.error(err)
     });
   }
 
@@ -56,6 +74,7 @@ export class MessageComponent {
 
     const message: CreateMessageDTO = {
       sender: this.user,
+      receiver: (this.user.userid === this.auction.seller.userid) ? this.auction.winner : this.auction.seller,
       auction: this.auction,
       content: this.newMessageContent,
       timestamp: new Date().toISOString(),
