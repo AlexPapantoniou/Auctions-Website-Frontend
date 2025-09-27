@@ -29,11 +29,11 @@ export class ReauctionComponent {
   ) {}
 
   ngOnInit(): void {
-    const userid = Number(this.route.snapshot.params['auctionid']);
+    const userid = Number(this.route.snapshot.params['userid']);
     if (userid) {
       this.userService.getUserById(userid).subscribe({
-        next: (auction) => {
-          this.user = auction;
+        next: (user) => {
+          this.user = user;
           this.loadItems();
         },
           error: (err) => console.log(err)
@@ -74,7 +74,7 @@ export class ReauctionComponent {
 
   createAuction(item: any): void {
     this.auctionService.addAuction(item.auction).subscribe({
-      next: (savedAuction) => {
+      next: () => {
         alert('Auction submitted successfully');
         this.router.navigate(['app-seller', this.user.userid]);
       },

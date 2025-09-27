@@ -58,44 +58,51 @@ export class SellerComponent {
       });
     }
   }
+
+  displayUnreadMessages(): void {
+    this.auctions.forEach(auction => {
+      this.messageService.getUnreadMessagesCount(auction.auctionid, this.user.userid).subscribe({
+        next: (count) => {
+          (auction as any).unreadMessages = count;
+        },
+        error: (err) => console.error(err)
+      });
+    });
+  }
   
   loadAuctionsOrdered(): void {
-    this.auctionService.getAuctionsOrdered(this.user.userid,this.activeOnly, this.page, this.size).subscribe(data => {
+    this.auctionService.getAuctionsOrdered(this.user.userid, this.activeOnly, this.page, this.size).subscribe(data => {
       this.auctions = data.content;
       this.totalPages = data.totalPages;
-
-      this.auctions.forEach(auction => {
-        this.messageService.getUnreadMessagesCount(auction.auctionid, this.user.userid).subscribe({
-          next: (count) => {
-            (auction as any).unreadMessages = count;
-          },
-          error: (err) => console.error(err)
-        });
-      });
+      this.displayUnreadMessages();
     });
   }
 
   loadCategories(): void {
-    this.categoryService.getAllCategories().subscribe(data => {
-      this.categories = data;
+    this.categoryService.getAllCategories().subscribe({
+      next: (categories) => this.categories = categories,
+      error: (err) => console.error(err)
     });
   }
 
   loadLocations(): void {
-    this.auctionService.getAllLocations().subscribe(data => {
-      this.locations = data;
+    this.auctionService.getAllLocations().subscribe({
+      next: (locations) => this.locations = locations,
+      error: (err) => console.error(err)
     });
   }
 
   loadCities(): void {
-    this.auctionService.getAllCities().subscribe(data => {
-      this.cities = data;
+    this.auctionService.getAllCities().subscribe({
+      next: (cities) => this.cities = cities,
+      error: (err) => console.error(err)
     });
   }
 
   loadCountries(): void {
-    this.auctionService.getAllCountries().subscribe(data => {
-      this.countries = data;
+    this.auctionService.getAllCountries().subscribe({
+      next: (countries) => this.countries = countries,
+      error: (err) => console.error(err)
     });
   }
 
@@ -108,6 +115,7 @@ export class SellerComponent {
       this.auctionService.searchAuctions(this.keyword, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
+        this.displayUnreadMessages();
       });
     }
     else {
@@ -120,6 +128,7 @@ export class SellerComponent {
       this.auctionService.getAuctionsByCategory(this.selectedCategory, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
+        this.displayUnreadMessages();
       });
     }
     else {
@@ -132,6 +141,7 @@ export class SellerComponent {
       this.auctionService.getAuctionsByLocation(this.selectedLocation, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
+        this.displayUnreadMessages();
       });
     }
     else {
@@ -144,6 +154,7 @@ export class SellerComponent {
       this.auctionService.getAuctionsByCity(this.selectedCity, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
+        this.displayUnreadMessages();
       });
     }
     else {
@@ -156,6 +167,7 @@ export class SellerComponent {
       this.auctionService.getAuctionsByCountry(this.selectedCountry, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
+        this.displayUnreadMessages();
       });
     }
     else {
@@ -168,6 +180,7 @@ export class SellerComponent {
       this.auctionService.getAuctionsBySeller(this.user.userid, this.page, this.size).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
+        this.displayUnreadMessages();
       });
     }
     else {

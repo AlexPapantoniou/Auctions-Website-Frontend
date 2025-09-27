@@ -21,9 +21,7 @@ export class MainVisitorComponent {
     const userid = Number(this.route.snapshot.params['userid']);
     if (userid) {
       this.userService.getUserById(userid).subscribe({
-        next: (user) => {
-          this.user = user;
-        },
+        next: (user) => this.user = user,
         error: (err) => console.error(err)
       });
     }

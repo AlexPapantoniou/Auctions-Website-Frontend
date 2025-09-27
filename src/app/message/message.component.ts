@@ -31,10 +31,8 @@ export class MessageComponent {
     const userid = Number(this.route.snapshot.params['userid']);
     if (userid) {
       this.userService.getUserById(userid).subscribe({
-        next: (user) => {
-          this.user = user;
-        },
-          error: (err) => console.log(err)
+        next: (user) => this.user = user,
+        error: (err) => console.log(err)
       });
     }
     const auctionid = Number(this.route.snapshot.params['auctionid']);

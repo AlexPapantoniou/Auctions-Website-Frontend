@@ -21,9 +21,7 @@ export class EditAuctionComponent {
     const auctionid = Number(this.route.snapshot.params['auctionid']);
     if (auctionid) {
       this.auctionService.getAuctionById(auctionid).subscribe({
-        next: (auction) => {
-          this.auction = auction;
-        },
+        next: (auction) => this.auction = auction,
         error: (err) => console.error(err)
       });
     }
@@ -48,14 +46,17 @@ export class EditAuctionComponent {
   }
 
   deleteAuction(): void {
-    this.auctionService.deleteAuction(this.auction.auctionid).subscribe({
-      next: () => {
-        this.router.navigate(['app-seller', this.auction.seller.userid]);
-      },
-      error: (err) => {
-        console.error('Error deleting auction:', err);
-      }
-    });
+    if (confirm("Are you sure you want to delete this auction? This decision is permanent")) {
+      this.auctionService.deleteAuction(this.auction.auctionid).subscribe({
+        next: () => {
+          alert("Auction deleted successfully");
+          this.router.navigate(['app-seller', this.auction.seller.userid]);
+        },
+        error: (err) => {
+          console.error('Error deleting auction:', err);
+        }
+      });
+    }
   }
 
   cancelEdit(): void {

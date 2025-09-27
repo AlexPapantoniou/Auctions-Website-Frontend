@@ -41,10 +41,8 @@ export class PlaceBidComponent {
     const userid = Number(this.route.snapshot.params['userid']);
     if (userid) {
       this.userService.getUserById(userid).subscribe({
-        next: (user) => {
-          this.user = user;
-        },
-          error: (err) => console.log(err)
+        next: (user) => this.user = user,
+        error: (err) => console.log(err)
       });
     }
     const auctionid = Number(this.route.snapshot.params['auctionid']);
@@ -91,7 +89,7 @@ export class PlaceBidComponent {
     }
 
     if (this.newBidAmount >= this.auction.buyPrice) { 
-      if (confirm("By bidding " + this.newBidAmount + ", you will instantly buy the item. Confirm?")) {
+      if (confirm('By bidding ' + this.newBidAmount + ', you will instantly buy the item. Confirm?')) {
         this.buyNow();
       }
       return;
@@ -112,8 +110,9 @@ export class PlaceBidComponent {
 
   buyNow(): void {
     this.auctionService.buyNow(this.auction.auctionid, this.user.userid).subscribe({
-      next: (response) => {
+      next: () => {
         alert('You have successfully bought the item!');
+        this.recommendationsService.logInteraction(this.user.userid, this.auction.auctionid, 'BID', this.auction.buyPrice);
         this.router.navigate(['app-bidder', this.user.userid]);
       },
       error: (err) => {

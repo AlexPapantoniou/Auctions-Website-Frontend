@@ -37,9 +37,7 @@ export class CreateAuctionComponent {
     if (userid) {
       this.auction.seller = { userid: userid };
       this.userService.getUserById(userid).subscribe({
-        next: (user) => {
-          this.user = user;
-        },
+        next: (user) => this.user = user,
         error: (err) => console.error(err)
       });
     }
@@ -82,7 +80,7 @@ export class CreateAuctionComponent {
     this.auction.item.categories = this.categories.map(name => ({ name }));
     
     this.auctionService.addAuction(this.auction).subscribe({
-      next: (savedAuction) => {
+      next: () => {
         alert("Auction submitted successfully!");
         this.router.navigate(['/app-seller', this.user.userid]);
       },

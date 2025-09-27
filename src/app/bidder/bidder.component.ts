@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AuctionService } from '../services/auction.service';
 import { CategoryService } from '../services/category.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-bidder',
@@ -65,26 +66,30 @@ export class BidderComponent {
   }
 
   loadCategories(): void {
-    this.categoryService.getAllCategories().subscribe(data => {
-      this.categories = data;
+    this.categoryService.getAllCategories().subscribe({
+      next: (categories) => this.categories = categories,
+      error: (err) => console.error(err)
     });
   }
 
   loadLocations(): void {
-    this.auctionService.getAllLocations().subscribe(data => {
-      this.locations = data;
+    this.auctionService.getAllLocations().subscribe({
+      next: (locations) => this.locations = locations,
+      error: (err) => console.error(err)
     });
   }
 
   loadCities(): void {
-    this.auctionService.getAllCities().subscribe(data => {
-      this.cities = data;
+    this.auctionService.getAllCities().subscribe({
+      next: (cities) => this.cities = cities,
+      error: (err) => console.error(err)
     });
   }
 
   loadCountries(): void {
-    this.auctionService.getAllCountries().subscribe(data => {
-      this.countries = data;
+    this.auctionService.getAllCountries().subscribe({
+      next: (countries) => this.countries = countries,
+      error: (err) => console.error(err)
     });
   }
 
