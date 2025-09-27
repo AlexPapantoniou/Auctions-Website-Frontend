@@ -192,6 +192,7 @@ export class SellerComponent {
     this.keyword = '';
     this.selectedCategory = '';
     this.selectedLocation = '';
+    this.selectedCity = '';
     this.selectedCountry = '';
     this.activeOnly = false;
     this.loadAuctionsOrdered();

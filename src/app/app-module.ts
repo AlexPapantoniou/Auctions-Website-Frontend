@@ -29,6 +29,7 @@ import { AuctionService } from './services/auction.service';
 import { ItemService } from './services/item.service';
 import { MessageService } from './services/message.service';
 import { RecommendationsService } from './services/recommendations.service';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { RecommendationsService } from './services/recommendations.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgxSliderModule,
     HttpClientModule
   ],
   providers: [UserService, AdminService, ExportService, AuctionService, ItemService, MessageService, RecommendationsService],

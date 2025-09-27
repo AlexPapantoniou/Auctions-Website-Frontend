@@ -39,9 +39,28 @@
             <option value="">All Countries</option>
             <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
             </select>
+
         </div>
 
-        <!-- Row 3: Clear filters -->
+        <!-- Row 3: Price filter -->
+        <div class="price-filter">
+            <h4>Price Range</h4>
+
+            <ngx-slider
+                [(value)]="selectedMinPrice"
+                [(highValue)]="selectedMaxPrice"
+                [options]="options">
+            </ngx-slider>
+
+            <div class="price-values">
+                <span>Min: €{{ selectedMinPrice }}</span>
+                <span>Max: €{{ selectedMaxPrice }}</span>
+            </div>
+
+            <button (click)="onPriceChange()">Apply Filter</button>
+            </div>
+
+        <!-- Row 4: Clear filters -->
         <div class="clear-row">
             <button class="clear-filters" (click)="clearFilters()">Clear Filters</button>
         </div>

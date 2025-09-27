@@ -87,6 +87,133 @@
   border-radius: 6px;
 }
 
+.price-filter {
+  max-width: 720px;
+  margin: 1.25rem auto;
+  padding: 1rem 1.2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.price-filter h4 {
+  margin: 0 0 0.5rem 0;
+  color: #1976d2;
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+.price-values {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  align-items: center;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.8rem;
+}
+
+.slider-wrapper {
+  position: relative;
+  height: 48px; /* leaves room for thumbs */
+  display: flex;
+  align-items: center;
+}
+
+/* Hide native outlines and visuals; we'll style thumbs ourselves */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  pointer-events: none; /* allow clicking through track; thumbs will still be interactive */
+}
+
+/* make thumbs interactive */
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1976d2;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(25,118,210,0.35);
+  cursor: pointer;
+  transition: transform .08s ease;
+}
+.range::-moz-range-thumb {
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1976d2;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(25,118,210,0.35);
+  cursor: pointer;
+  transition: transform .08s ease;
+}
+.range:active::-webkit-slider-thumb { transform: scale(1.05); }
+.range:active::-moz-range-thumb { transform: scale(1.05); }
+
+/* Invisible track (we draw our own) */
+.range::-webkit-slider-runnable-track { height: 8px; background: transparent; border: none; }
+.range::-moz-range-track { height: 8px; background: transparent; border: none; }
+
+/* Visual track and highlight */
+.track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #e7edf7;
+  border-radius: 6px;
+  overflow: visible;
+}
+
+.range-highlight {
+  position: absolute;
+  height: 100%;
+  background: linear-gradient(90deg, #1976d2, #1565c0);
+  border-radius: 6px;
+}
+
+/* Buttons */
+.filter-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 0.9rem;
+}
+
+.apply-button {
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .08s ease, background .12s ease;
+}
+
+.apply-button {
+  background: #1976d2;
+  color: #fff;
+}
+.apply-btn:hover { background: #1565c0; transform: translateY(-1px); }
+
+/* Responsive */
+@media (max-width: 520px) {
+  .price-filter { padding: 0.75rem; }
+  .range::-webkit-slider-thumb, .range::-moz-range-thumb { width: 16px; height: 16px; }
+}
+
 /* Row 3: Clear filters + My Auctions */
 .clear-row {
   display: flex;

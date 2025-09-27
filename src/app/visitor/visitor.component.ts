@@ -5,6 +5,7 @@ import { CategoryService } from '../services/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecommendationsService } from '../services/recommendations.service';
 import { MessageService } from '../services/message.service';
+import { Options } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-visitor',
@@ -31,6 +32,19 @@ export class VisitorComponent {
   countries: string[] = [];
   selectedCountry = '';
 
+  minActivePrice!: number;  // Min bid on currently active auctions
+  maxActivePrice!: number;  // Max bid on currently active auctions
+  selectedMinPrice = 0;
+  selectedMaxPrice = 500;
+  options: Options = {
+    floor: 0,
+    ceil: 500,
+    step: 1,
+    translate: (value: number): string => {
+      return `€${value}`;
+    }
+  };
+
   constructor(
     private route: ActivatedRoute,  // Extract userid of logged in user
     private router: Router,         // Navigate to other components
@@ -52,6 +66,8 @@ export class VisitorComponent {
           this.loadLocations();
           this.loadCities();
           this.loadCountries();
+          this.loadMinActivePrice();
+          this.loadMaxActivePrice();
         },
           error: (err) => console.error(err)
       });
@@ -105,6 +121,26 @@ export class VisitorComponent {
   loadCountries(): void {
     this.auctionService.getAllCountries().subscribe({
       next: (countries) => this.countries = countries,
+      error: (err) => console.error(err)
+    });
+  }
+  
+  loadMinActivePrice(): void {
+    this.auctionService.getMinActivePrice().subscribe({
+      next: (minActivePrice) => {
+        this.minActivePrice = minActivePrice;
+        this.options.floor = minActivePrice;
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  loadMaxActivePrice(): void {
+    this.auctionService.getMaxActivePrice().subscribe({
+      next: (maxActivePrice) => {
+        this.maxActivePrice = maxActivePrice;
+        this.options.ceil = maxActivePrice;
+      },
       error: (err) => console.error(err)
     });
   }
@@ -183,13 +219,25 @@ export class VisitorComponent {
     }
   }
 
+  onPriceChange(): void {
+    this.auctionService.getAuctionsByPrice(this.selectedMinPrice, this.selectedMaxPrice, this.page, this.pageSize).subscribe(data => {
+      this.auctions = data.content;
+      this.totalPages = data.totalPages;
+      this.displayUnreadMessages();
+    });
+  }
+
+
   /* ---------------------------------------------------------------------------------- */
 
   clearFilters(): void {
     this.keyword = '';
     this.selectedCategory = '';
     this.selectedLocation = '';
+    this.selectedCity = '';
     this.selectedCountry = '';
+    this.selectedMinPrice = this.minActivePrice;
+    this.selectedMaxPrice = Math.min(500, this.maxActivePrice);
     this.activeOnly = false;
     this.loadAuctionsOrdered();
   }

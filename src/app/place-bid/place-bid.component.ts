@@ -95,17 +95,19 @@ export class PlaceBidComponent {
       return;
     }
 
-    this.bidService.placeBid(this.auction.auctionid, this.user.userid, this.newBidAmount).subscribe({
-      next: () => {
-        this.recommendationsService.logInteraction(this.user.userid, this.auction.auctionid, 'BID', this.newBidAmount);
-        this.loadBids();
-        this.newBidAmount = 0;
-      },
-      error: (err) => {
-        console.error('Error placing bid:', err);
-        alert('Failed to place bid: ' + err.error?.message);
-      }
-    });
+    if (confirm("Are you sure you want to bid " + this.newBidAmount + " ont this auction? You can't cancel your bid after it is placed")) {
+      this.bidService.placeBid(this.auction.auctionid, this.user.userid, this.newBidAmount).subscribe({
+        next: () => {
+          this.recommendationsService.logInteraction(this.user.userid, this.auction.auctionid, 'BID', this.newBidAmount);
+          this.loadBids();
+          this.newBidAmount = 0;
+        },
+        error: (err) => {
+          console.error('Error placing bid:', err);
+          alert('Failed to place bid: ' + err.error?.message);
+        }
+      });
+    }
   }
 
   buyNow(): void {

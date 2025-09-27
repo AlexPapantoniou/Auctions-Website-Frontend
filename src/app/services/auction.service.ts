@@ -44,6 +44,14 @@ export class AuctionService {
     return this.http.get<string[]>(`${this.apiUrl}/countries`);
   }
 
+  getMinActivePrice(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/minPrice`);
+  }
+
+  getMaxActivePrice(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/maxPrice`);
+  }
+
   getAuctionsByLocation(location: string, page: number, size: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/location/${encodeURIComponent(location)}?page=${page}&size=${size}`);
   }
@@ -54,6 +62,10 @@ export class AuctionService {
 
   getAuctionsByCountry(country: string, page: number, size: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/country/${encodeURIComponent(country)}?page=${page}&size=${size}`);
+  }
+
+  getAuctionsByPrice(minPrice: number, maxPrice: number, page: number, size: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/price?minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&size=${size}`);
   }
 
   getAuctionsOrdered(userId: number, activeOnly: boolean, page: number, size: number): Observable<any> {
