@@ -20,33 +20,48 @@
         <!-- Row 2: Select filters -->
         <div class="filters-row">
             <select [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
-            <option value="">All Categories</option>
+            <option value="all">All Categories</option>
             <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
             </select>
 
             <select [(ngModel)]="selectedLocation" (change)="onLocationChange()">
-            <option value="">All Locations</option>
+            <option value="all">All Locations</option>
             <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
             </select>
 
             <select [(ngModel)]="selectedCity" (change)="onCityChange()">
-            <option value="">All Cities</option>
+            <option value="all">All Cities</option>
             <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
             </select>
 
             <select [(ngModel)]="selectedCountry" (change)="onCountryChange()">
-            <option value="">All Countries</option>
+            <option value="all">All Countries</option>
             <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
             </select>
         </div>
 
-        <!-- Row 3: Clear filters -->
+        <!-- Row 3: Price filter -->
+        <div class="price-filter">
+            <h4>Price Range</h4>
+
+            <form>
+                <label for="min-price">Minimun Price (current min: {{ minActivePrice }})</label>
+                <input type="number" id="min-price" name="min-price" [(ngModel)]="selectedMinPrice" />
+
+                <label for="max-price">Maximum Price (current max: {{ maxActivePrice }})</label>
+                <input type="number" id="max-price" name="max-price" [(ngModel)]="selectedMaxPrice" />
+            </form>    
+
+            <button (click)="onPriceChange()">Apply Filter</button>
+        </div>
+
+        <!-- Row 4: Clear filters -->
         <div class="clear-row">
             <button class="clear-filters" (click)="clearFilters()">Clear Filters</button>
         </div>
 
         <label class="checkbox-row">
-            <input type="checkbox" [(ngModel)]="activeOnly" (change)="loadAuctionsOrdered()" />
+            <input type="checkbox" [(ngModel)]="activeOnly" (change)="loadAuctionsFilteredOrderedByWeight()" />
             <span class="checkmark"></span>
             Show only active auctions
         </label>

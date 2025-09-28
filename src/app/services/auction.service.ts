@@ -16,12 +16,8 @@ export class AuctionService {
     return this.http.get(`${this.apiUrl}?page=${page}&size=${size}`);
   }
 
-  searchAuctions(keyword: string, page:number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/search?keyword=${keyword}&page=${page}&size=${size}`);
-  }
-
-  getAuctionsByCategory(category: string, page:number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/category?category=${encodeURIComponent(category)}&page=${page}&size=${size}`);
+  searchAuctions(userid: number, keyword: string, page:number, size: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/search/${userid}?keyword=${keyword}&page=${page}&size=${size}`);
   }
 
   getAuctionById(id: number): Observable<any> {
@@ -44,6 +40,10 @@ export class AuctionService {
     return this.http.get<string[]>(`${this.apiUrl}/countries`);
   }
 
+  getPriceRange(): Observable<{ min: number, max: number }> {
+    return this.http.get<{ min: number, max: number }>(`${this.apiUrl}/price-range`);
+  }
+
   getMinActivePrice(): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/minPrice`);
   }
@@ -52,24 +52,11 @@ export class AuctionService {
     return this.http.get<number>(`${this.apiUrl}/maxPrice`);
   }
 
-  getAuctionsByLocation(location: string, page: number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/location/${encodeURIComponent(location)}?page=${page}&size=${size}`);
-  }
+  getAuctionsFilteredOrderedByWeight(userid: number, category: string, location: string, city: string, country: string, 
+    minPrice: number, maxPrice: number, activeOnly: boolean, page: number, size: number): Observable<any> {
 
-  getAuctionsByCity(city: string, page: number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/city/${encodeURIComponent(city)}?page=${page}&size=${size}`);
-  }
-
-  getAuctionsByCountry(country: string, page: number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/country/${encodeURIComponent(country)}?page=${page}&size=${size}`);
-  }
-
-  getAuctionsByPrice(minPrice: number, maxPrice: number, page: number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/price?minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&size=${size}`);
-  }
-
-  getAuctionsOrdered(userId: number, activeOnly: boolean, page: number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/ordered/${userId}?activeOnly=${activeOnly}&page=${page}&size=${size}`);
+    return this.http.get(`${this.apiUrl}/filtered/${userid}/${category}/${location}/${city}/${country}/${minPrice}/${maxPrice}` + 
+                          `?activeOnly=${activeOnly}&page=${page}&size=${size}`);
   }
 
   addAuction(auction: Auction): Observable<Auction> {

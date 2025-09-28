@@ -17,20 +17,25 @@ export class BidderComponent {
   user: any;
   auctions: any[] = [];
   page = 0;
-  size = 3;
+  pageSize = 3;
   totalPages = 0;
   activeOnly: boolean = false;
 
   keyword = '';
 
   categories: any[] = [];
-  selectedCategory = '';
+  selectedCategory = 'all';
   locations: string[] = [];
-  selectedLocation = '';
+  selectedLocation = 'all';
   cities: string[] = [];
-  selectedCity = '';
+  selectedCity = 'all';
   countries: string[] = [];
-  selectedCountry = '';
+  selectedCountry = 'all';
+
+  minActivePrice!: number;  // Min bid on currently active auctions
+  maxActivePrice!: number;  // Max bid on currently active auctions
+  selectedMinPrice = 0;
+  selectedMaxPrice = 10000;
 
   constructor (
     private route: ActivatedRoute,
@@ -38,6 +43,7 @@ export class BidderComponent {
     private userService: UserService,
     private auctionService: AuctionService,
     private categoryService: CategoryService,
+    private messageService: MessageService,
     private recommendationsService: RecommendationsService
   ) {}
 
@@ -47,22 +53,38 @@ export class BidderComponent {
       this.userService.getUserById(userid).subscribe({
         next: (user) => {
           this.user = user;
-          this.loadAuctionsOrdered();
           this.loadCategories();
           this.loadLocations();
           this.loadCities();
           this.loadCountries();
+          this.loadMinActivePrice();
+          this.loadMaxActivePrice();
+          this.loadAuctionsFilteredOrderedByWeight();
         },
           error: (err) => console.error(err)
       });
     }
   }
 
-  loadAuctionsOrdered(): void {
-    this.auctionService.getAuctionsOrdered(this.user.userid, this.activeOnly, this.page, this.size).subscribe(data => {
-      this.auctions = data.content;
-      this.totalPages = data.totalPages;
+  displayUnreadMessages(): void {
+    this.auctions.forEach(auction => {
+      this.messageService.getUnreadMessagesCount(auction.auctionid, this.user.userid).subscribe({
+        next: (count) => {
+          (auction as any).unreadMessages = count;
+        },
+        error: (err) => console.error(err)
+      });
     });
+  }
+
+  // Load the available auctions filtered by possible filters used and ordered by user's interest
+  loadAuctionsFilteredOrderedByWeight(): void {
+    this.auctionService.getAuctionsFilteredOrderedByWeight(this.user.userid, this.selectedCategory, this.selectedLocation, 
+      this.selectedCity, this.selectedCountry, this.selectedMinPrice, this.selectedMaxPrice, this.activeOnly, this.page, this.pageSize).subscribe(data => {
+        this.auctions = data.content;
+        this.totalPages = data.totalPages;
+        this.displayUnreadMessages();
+      });
   }
 
   loadCategories(): void {
@@ -93,69 +115,116 @@ export class BidderComponent {
     });
   }
 
+  loadMinActivePrice(): void {
+    this.auctionService.getMinActivePrice().subscribe({
+      next: (minActivePrice) => {
+        this.minActivePrice = minActivePrice;
+        this.selectedMinPrice = minActivePrice;
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  loadMaxActivePrice(): void {
+    this.auctionService.getMaxActivePrice().subscribe({
+      next: (maxActivePrice) => {
+        this.maxActivePrice = maxActivePrice;
+        this.selectedMaxPrice = maxActivePrice;
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
   roleSelector(): void {
     this.router.navigate(['app-main-visitor', this.user.userid]);
   }
 
+  /* ---------------------------------------------------------------------------------- */
+  // Functions to find auctions based on search or filters used
+
   search(): void {
     if (this.keyword.trim() !== '') {
-      this.auctionService.searchAuctions(this.keyword, this.page, this.size).subscribe(data => {
+      this.auctionService.searchAuctions(this.user.userid, this.keyword, this.page, this.pageSize).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
+        this.displayUnreadMessages();
       });
     }
     else {
-      this.loadAuctionsOrdered();
+      this.loadAuctionsFilteredOrderedByWeight();
     }
   }
 
   onCategoryChange(): void {
     if (this.selectedCategory) {
-      this.auctionService.getAuctionsByCategory(this.selectedCategory, this.page, this.size).subscribe(data => {
+      this.auctionService.getAuctionsFilteredOrderedByWeight(this.user.userid, this.selectedCategory, this.selectedLocation, 
+      this.selectedCity, this.selectedCountry, this.selectedMinPrice, this.selectedMaxPrice, this.activeOnly, this.page, this.pageSize).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
+        this.displayUnreadMessages();
       });
     }
     else {
-      this.loadAuctionsOrdered();
+      this.loadAuctionsFilteredOrderedByWeight();
     }
   }
 
   onLocationChange(): void {
     if (this.selectedLocation) {
-      this.auctionService.getAuctionsByLocation(this.selectedLocation, this.page, this.size).subscribe(data => {
+      this.auctionService.getAuctionsFilteredOrderedByWeight(this.user.userid, this.selectedCategory, this.selectedLocation, 
+      this.selectedCity, this.selectedCountry, this.selectedMinPrice, this.selectedMaxPrice, this.activeOnly, this.page, this.pageSize).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
+        this.displayUnreadMessages();
       });
     }
     else {
-      this.loadAuctionsOrdered();
+      this.loadAuctionsFilteredOrderedByWeight();
     }
   }
 
   onCityChange(): void {
     if (this.selectedCity) {
-      this.auctionService.getAuctionsByCity(this.selectedCity, this.page, this.size).subscribe(data => {
+      this.auctionService.getAuctionsFilteredOrderedByWeight(this.user.userid, this.selectedCategory, this.selectedLocation, 
+      this.selectedCity, this.selectedCountry, this.selectedMinPrice, this.selectedMaxPrice, this.activeOnly, this.page, this.pageSize).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
+        this.displayUnreadMessages();
       });
     }
     else {
-      this.loadAuctionsOrdered();
+      this.loadAuctionsFilteredOrderedByWeight();
     }
   }
 
   onCountryChange(): void {
     if (this.selectedCountry) {
-      this.auctionService.getAuctionsByCountry(this.selectedCountry, this.page, this.size).subscribe(data => {
+      this.auctionService.getAuctionsFilteredOrderedByWeight(this.user.userid, this.selectedCategory, this.selectedLocation, 
+      this.selectedCity, this.selectedCountry, this.selectedMinPrice, this.selectedMaxPrice, this.activeOnly, this.page, this.pageSize).subscribe(data => {
         this.auctions = data.content;
         this.totalPages = data.totalPages;
+        this.displayUnreadMessages();
       });
     }
     else {
-      this.loadAuctionsOrdered();
+      this.loadAuctionsFilteredOrderedByWeight();
     }
   }
+
+  onPriceChange(): void {
+    if (this.selectedMinPrice > this.selectedMaxPrice) {
+      this.selectedMinPrice = this.selectedMaxPrice - 1;
+    }
+
+    this.auctionService.getAuctionsFilteredOrderedByWeight(this.user.userid, this.selectedCategory, this.selectedLocation, 
+      this.selectedCity, this.selectedCountry, this.selectedMinPrice, this.selectedMaxPrice, this.activeOnly, this.page, this.pageSize).subscribe(data => {
+      this.auctions = data.content;
+      this.totalPages = data.totalPages;
+      this.displayUnreadMessages();
+    });
+  }
+
+  /* ---------------------------------------------------------------------------------- */
 
   viewAuctionDetails(auctionid: number): void {
     this.recommendationsService.logInteraction(this.user.userid, auctionid, 'VIEW', 1.0);
@@ -175,25 +244,27 @@ export class BidderComponent {
 
   clearFilters(): void {
     this.keyword = '';
-    this.selectedCategory = '';
-    this.selectedLocation = '';
-    this.selectedCity = '';
-    this.selectedCountry = '';
+    this.selectedCategory = 'all';
+    this.selectedLocation = 'all';
+    this.selectedCity = 'all';
+    this.selectedCountry = 'all';
+    this.selectedMinPrice = this.minActivePrice;
+    this.selectedMaxPrice = Math.min(500, this.maxActivePrice);
     this.activeOnly = false;
-    this.loadAuctionsOrdered();
+    this.loadAuctionsFilteredOrderedByWeight();
   }
 
   nextPage() {
     if (this.page < this.totalPages - 1) {
       this.page++;
-      this.loadAuctionsOrdered();
+      this.loadAuctionsFilteredOrderedByWeight();
     }
   }
 
   prevPage() {
     if (this.page > 0) {
       this.page--;
-      this.loadAuctionsOrdered();
+      this.loadAuctionsFilteredOrderedByWeight();
     }
   }
 }
