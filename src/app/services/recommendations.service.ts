@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserAuctionInteraction } from '../model/userAuctionInteraction';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,8 @@ export class RecommendationsService {
 
   constructor(private http: HttpClient) {}
 
-  logInteraction(userid: number, auctionid: number, type: string, weight: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/interactions`, null, {
-      params: { userid, auctionid, type, weight }
-    });
+  logInteraction(uai: UserAuctionInteraction): Observable<any> {
+    return this.http.post(`${this.apiUrl}/interactions`, uai);
   }
 
   getUserInteractions(userid: number): Observable<any[]> {
@@ -26,7 +25,7 @@ export class RecommendationsService {
 
   saveUserFactors(userid: number, factors: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/factors/user/${userid}`, factors, {
-      headers: { 'Content-Type': 'application.jason' }
+      headers: { 'Content-Type': 'application.json' }
     });
   }
 
@@ -36,7 +35,7 @@ export class RecommendationsService {
 
   saveAuctionFactors(auctionid: number, factors: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/factors/auction/${auctionid}`, factors, {
-      headers: { 'Content-Type': 'application.jason' }
+      headers: { 'Content-Type': 'application.json' }
     });
   }
 

@@ -47,7 +47,7 @@
             <h4>Price Range</h4>
 
             <form>
-                <label for="min-price">Minimun Price (current min: {{ minActivePrice != null ? minActivePrice : "N/A" }})</label>
+                <label for="min-price">Minimun Price (current min: {{ minActivePrice }})</label>
                 <input type="number" id="min-price" name="min-price" [(ngModel)]="selectedMinPrice" />
 
                 <label for="max-price">Maximum Price (current max: {{ maxActivePrice }})</label>
@@ -76,7 +76,7 @@
         <p>{{ auction.item?.description }}</p>
         
         <div class="auction-actions">
-            <button (click)="viewAuctionDetails(auction.auctionid)">Details</button>
+            <button (click)="viewAuctionDetails(auction)">Details</button>
             <button 
                 *ngIf="user && auction.seller.userid === user.userid"
                 (click)="editAuction(auction.auctionid)">

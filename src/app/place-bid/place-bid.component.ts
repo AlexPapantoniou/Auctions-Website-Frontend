@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionService } from '../services/auction.service';
 import { BidService } from '../services/bid.service';
 import { RecommendationsService } from '../services/recommendations.service';
+import { UserAuctionInteraction } from '../model/userAuctionInteraction';
 
 @Component({
   selector: 'app-place-bid',
@@ -95,10 +96,22 @@ export class PlaceBidComponent {
       return;
     }
 
-    if (confirm("Are you sure you want to bid " + this.newBidAmount + " ont this auction? You can't cancel your bid after it is placed")) {
+    if (confirm("Are you sure you want to bid " + this.newBidAmount + " on this auction? You can't cancel your bid after it is placed")) {
       this.bidService.placeBid(this.auction.auctionid, this.user.userid, this.newBidAmount).subscribe({
         next: () => {
-          this.recommendationsService.logInteraction(this.user.userid, this.auction.auctionid, 'BID', this.newBidAmount);
+          const uai: UserAuctionInteraction = {
+            user: this.user,
+            auction: this.auction,
+            interactionType: 'BID',
+            weight: this.newBidAmount
+          };
+          this.recommendationsService.logInteraction(uai).subscribe({
+            next: () => {alert("Interaction logged")},
+            error: () => {
+              alert("Error logging interaction");
+              return;
+            }
+          });
           this.loadBids();
           this.newBidAmount = 0;
         },
@@ -114,7 +127,19 @@ export class PlaceBidComponent {
     this.auctionService.buyNow(this.auction.auctionid, this.user.userid).subscribe({
       next: () => {
         alert('You have successfully bought the item!');
-        this.recommendationsService.logInteraction(this.user.userid, this.auction.auctionid, 'BID', this.auction.buyPrice);
+        const uai: UserAuctionInteraction = {
+          user: this.user,
+          auction: this.auction,
+          interactionType: 'BID',
+          weight: this.auction.buyPrice
+        };
+        this.recommendationsService.logInteraction(uai).subscribe({
+          next: () => {alert("Interaction logged")},
+          error: () => {
+            alert("Error logging interaction");
+            return;
+          }
+        });
         this.router.navigate(['app-bidder', this.user.userid]);
       },
       error: (err) => {

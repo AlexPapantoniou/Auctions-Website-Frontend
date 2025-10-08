@@ -1,3 +1,4 @@
+import { UserAuctionInteraction } from './../model/userAuctionInteraction';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -6,6 +7,7 @@ import { AuctionService } from '../services/auction.service';
 import { CategoryService } from '../services/category.service';
 import { RecommendationsService } from '../services/recommendations.service';
 import { MessageService } from '../services/message.service';
+import { Auction } from '../model/auction.model';
 
 @Component({
   selector: 'app-seller',
@@ -32,8 +34,8 @@ export class SellerComponent {
   countries: string[] = [];
   selectedCountry = 'all';
 
-  minActivePrice!: number;  // Min bid on currently active auctions
-  maxActivePrice!: number;  // Max bid on currently active auctions
+  minActivePrice: number = 0;       // Min bid on currently active auctions
+  maxActivePrice: number = 10000;   // Max bid on currently active auctions
   selectedMinPrice: number = 0;
   selectedMaxPrice: number = 10000;
 
@@ -69,9 +71,7 @@ export class SellerComponent {
   displayUnreadMessages(): void {
     this.auctions.forEach(auction => {
       this.messageService.getUnreadMessagesCount(auction.auctionid, this.user.userid).subscribe({
-        next: (count) => {
-          (auction as any).unreadMessages = count;
-        },
+        next: (count) => (auction as any).unreadMessages = count,
         error: (err) => console.error(err)
       });
     });
@@ -213,6 +213,14 @@ export class SellerComponent {
       this.selectedMinPrice = this.selectedMaxPrice - 1;
     }
 
+    if (this.selectedMinPrice < this.minActivePrice) {
+      this.selectedMinPrice = this.minActivePrice;
+    }
+
+    if (this.selectedMaxPrice > this.maxActivePrice) {
+      this.selectedMaxPrice = this.maxActivePrice;
+    }
+
     this.auctionService.getAuctionsFilteredOrderedByWeight(this.user.userid, this.selectedCategory, this.selectedLocation, 
       this.selectedCity, this.selectedCountry, this.selectedMinPrice, this.selectedMaxPrice, this.activeOnly, this.page, this.pageSize).subscribe(data => {
       this.auctions = data.content;
@@ -246,9 +254,21 @@ export class SellerComponent {
     this.loadAuctionsFilteredOrderedByWeight();
   }
   
-  viewAuctionDetails(auctionid: number): void {
-    this.recommendationsService.logInteraction(this.user.userid, auctionid, 'VIEW', 1.0);
-    this.router.navigate(['/app-auction-details', this.user.userid, auctionid]);
+  viewAuctionDetails(auction: Auction): void {
+    const uai: UserAuctionInteraction = {
+      user: this.user,
+      auction: auction,
+      interactionType: 'VIEW',
+      weight: 1.0
+    };
+    this.recommendationsService.logInteraction(uai).subscribe({
+      next: () => {alert("Interaction logged")},
+      error: () => {
+        alert("Error logging interaction");
+        return;
+      }
+    });
+    this.router.navigate(['/app-auction-details', this.user.userid, auction.auctionid]);
   }
 
   editAuction(auctionid: number): void {
